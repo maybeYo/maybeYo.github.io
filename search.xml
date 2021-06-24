@@ -59,12 +59,12 @@
 
 
 
-<h1 id="5-添加顶部加载条"><a href="#5-添加顶部加载条" class="headerlink" title="5.添加顶部加载条"></a>5.添加顶部加载条</h1><p><strong>打开 themes/next/layout/_partials/head/head.njk文件，添加代码</strong></p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">&lt;script src=&quot;//cdn.bootcss.com/pace/1.0.2/pace.min.js&quot;&gt;&lt;/script&gt;  </span><br><span class="line">&lt;link href=&quot;//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css&quot; rel=&quot;stylesheet&quot;&gt;  </span><br><span class="line"></span><br><span class="line">但是，默认的是粉色的，要改变颜色可以在themes/next/layout/_partials/head/head.njk文件中添加如下代码（接在刚才link的后面）</span><br><span class="line"></span><br><span class="line">&lt;style&gt;</span><br><span class="line">    .pace .pace-progress &#123;</span><br><span class="line">        background: #1E92FB; /*进度条颜色*/</span><br><span class="line">        height: 3px;</span><br><span class="line">    &#125;</span><br><span class="line">    .pace .pace-progress-inner &#123;</span><br><span class="line">         box-shadow: 0 0 10px #1E92FB, 0 0 5px     #1E92FB; /*阴影颜色*/</span><br><span class="line">    &#125;</span><br><span class="line">    .pace .pace-activity &#123;</span><br><span class="line">        border-top-color: #1E92FB;    /*上边框颜色*/</span><br><span class="line">        border-left-color: #1E92FB;    /*左边框颜色*/</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+<h1 id="5-添加顶部加载条"><a href="#5-添加顶部加载条" class="headerlink" title="5.添加顶部加载条"></a>5.添加顶部加载条</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">nprogress:</span><br><span class="line">  enable: true</span><br><span class="line">  spinner: true</span><br></pre></td></tr></table></figure>
 
 
 
-<p><img src="https://img-blog.csdnimg.cn/20210619223651294.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3lleHVzYW55ZQ==,size_16,color_FFFFFF,t_70" alt="添加顶部加载条"></p>
+
+
 <h1 id="6-为博客加上萌萌的宠物"><a href="#6-为博客加上萌萌的宠物" class="headerlink" title="6.为博客加上萌萌的宠物"></a>6.为博客加上萌萌的宠物</h1><p><strong>在终端切换到你的博客的路径里，然后输入如下代码：</strong></p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">npm install --save hexo-helper-live2d</span><br></pre></td></tr></table></figure>
 
@@ -73,11 +73,6 @@
 <h1 id="7-添加搜索功能"><a href="#7-添加搜索功能" class="headerlink" title="7.添加搜索功能"></a>7.添加搜索功能</h1><p><strong>1、安装 hexo-generator-searchdb 插件</strong></p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">npm install hexo-generator-searchdb --save</span><br></pre></td></tr></table></figure>
 <p><strong>2、打开 主题配置文件 找到Local search，将enable设置为true</strong></p>
-<p><strong>浏览进度设置</strong></p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">back2top:</span><br><span class="line">  enable: true							</span><br><span class="line"><span class="meta">  #</span><span class="bash"> Back to top <span class="keyword">in</span> sidebar.</span></span><br><span class="line">  sidebar: false</span><br><span class="line"><span class="meta">  #</span><span class="bash"> Scroll percent label <span class="keyword">in</span> b2t button.</span></span><br><span class="line">  scrollpercent: true					</span><br></pre></td></tr></table></figure>
-
-
-
 <h1 id="8-开启代码复制"><a href="#8-开启代码复制" class="headerlink" title="8.开启代码复制"></a>8.开启代码复制</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">codeblock:</span><br><span class="line">  copy_button:</span><br><span class="line">    enable: true</span><br></pre></td></tr></table></figure>
 
 
@@ -93,6 +88,28 @@
 <h1 id="11-自定义博客图标"><a href="#11-自定义博客图标" class="headerlink" title="11.自定义博客图标"></a>11.自定义博客图标</h1><p><strong>博客网站的图标可以在iconfont等网站选择和制作图标</strong></p>
 <p><strong>文件路径：\themes\next\source，images修改主题images下文件替换</strong></p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">favicon:</span><br><span class="line">  small: /images/favicon-16x16-next.png</span><br><span class="line">  medium: /images/favicon-32x32-next.png</span><br><span class="line">  apple_touch_icon: /images/apple-touch-icon-next.png</span><br><span class="line">  safari_pinned_tab: /images/logo.svg</span><br><span class="line"><span class="meta">  #</span><span class="bash">android_manifest: /manifest.json</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="12-开启站点阅读时间"><a href="#12-开启站点阅读时间" class="headerlink" title="12.开启站点阅读时间"></a>12.开启站点阅读时间</h1><figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="string">npm</span> <span class="string">install</span> <span class="string">hexo-word-counter</span></span><br><span class="line"><span class="string">hexo</span> <span class="string">clean</span></span><br><span class="line"></span><br><span class="line"><span class="attr">symbols_count_time:</span></span><br><span class="line">  <span class="attr">separated_meta:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">item_text_total:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="12-1-页面阅读统计-不蒜子统计"><a href="#12-1-页面阅读统计-不蒜子统计" class="headerlink" title="12.1 页面阅读统计 不蒜子统计"></a>12.1 页面阅读统计 不蒜子统计</h2><figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">busuanzi_count:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">false</span>              	   <span class="comment"># 设true 开启</span></span><br><span class="line">  <span class="attr">total_visitors:</span> <span class="literal">true</span>      	   <span class="comment"># 总阅读人数（uv数）</span></span><br><span class="line">  <span class="attr">total_visitors_icon:</span> <span class="string">fa</span> <span class="string">fa-user</span>  <span class="comment"># 阅读总人数的图标</span></span><br><span class="line">  <span class="attr">total_views:</span> <span class="literal">true</span>         	   <span class="comment"># 总阅读次数（pv数）</span></span><br><span class="line">  <span class="attr">total_views_icon:</span> <span class="string">fa</span> <span class="string">fa-eye</span>      <span class="comment"># 阅读总次数的图标</span></span><br><span class="line">  <span class="attr">post_views:</span> <span class="literal">true</span>         		   <span class="comment"># 开启内容阅读次数</span></span><br><span class="line">  <span class="attr">post_views_icon:</span> <span class="string">far</span> <span class="string">fa-eye</span>      <span class="comment"># 内容页阅读数的图标</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="13-文章原创声明"><a href="#13-文章原创声明" class="headerlink" title="13.文章原创声明"></a>13.文章原创声明</h1><figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Creative Commons 4.0 International License.</span></span><br><span class="line"><span class="comment"># See: https://creativecommons.org/about/cclicenses/</span></span><br><span class="line"><span class="attr">creative_commons:</span></span><br><span class="line">  <span class="comment"># Available values: by | by-nc | by-nc-nd | by-nc-sa | by-nd | by-sa | cc-zero</span></span><br><span class="line">  <span class="attr">license:</span> <span class="string">by-nc-sa</span></span><br><span class="line">  <span class="comment"># Available values: big | small</span></span><br><span class="line">  <span class="attr">size:</span> <span class="string">small</span></span><br><span class="line">  <span class="attr">sidebar:</span> <span class="literal">false</span></span><br><span class="line">  <span class="attr">post:</span> <span class="literal">false</span></span><br><span class="line">  <span class="comment"># You can set a language value if you prefer a translated version of CC license, e.g. deed.zh</span></span><br><span class="line">  <span class="comment"># CC licenses are available in 39 languages, you can find the specific and correct abbreviation you need on https://creativecommons.org</span></span><br><span class="line">  <span class="attr">language:</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h1 id="14-修改底部标签样式"><a href="#14-修改底部标签样式" class="headerlink" title="14.修改底部标签样式"></a>14.修改底部标签样式</h1><figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Use icon instead of the symbol # to indicate the tag at the bottom of the post</span></span><br><span class="line"><span class="attr">tag_icon:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="15-显示当然浏览进度"><a href="#15-显示当然浏览进度" class="headerlink" title="15.显示当然浏览进度"></a>15.显示当然浏览进度</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">back2top:</span><br><span class="line">  enable: true							</span><br><span class="line"><span class="meta">  #</span><span class="bash"> Back to top <span class="keyword">in</span> sidebar.</span></span><br><span class="line">  sidebar: false</span><br><span class="line"><span class="meta">  #</span><span class="bash"> Scroll percent label <span class="keyword">in</span> b2t button.</span></span><br><span class="line">  scrollpercent: true					</span><br></pre></td></tr></table></figure>
 
 ]]></content>
       <categories>
