@@ -1,6 +1,153 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>NEXT</title>
+    <url>/2021/06/20/NEXT/</url>
+    <content><![CDATA[<p>NEXT 配置修改</p>
+<span id="more"></span>
+<p>参考地址<br><a href="http://theme-next.iissnan.com/theme-settings.html#rss">http://theme-next.iissnan.com/theme-settings.html#rss</a></p>
+<h1 id="1-Next主题风格"><a href="#1-Next主题风格" class="headerlink" title="1.Next主题风格"></a>1.Next主题风格</h1><p>Next提供了四中主题风格scheme，可以在主题配置文件_config.yml文件中进行选择</p>
+<p>分别是Muse、Mist、Pisces、Gemini</p>
+<p>默认时Muse主题，我用的是Gemini主题，所以把Muse注释掉，Gemini去掉注释</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> Schemes</span></span><br><span class="line"><span class="meta">#</span><span class="bash">scheme: Muse</span></span><br><span class="line"><span class="meta">#</span><span class="bash">scheme: Mist</span></span><br><span class="line"><span class="meta">#</span><span class="bash">scheme: Pisces</span></span><br><span class="line">scheme: Gemini</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="2-设置菜单栏"><a href="#2-设置菜单栏" class="headerlink" title="2.设置菜单栏"></a>2.设置菜单栏</h1><h2 id="取消菜单栏注释"><a href="#取消菜单栏注释" class="headerlink" title="取消菜单栏注释"></a>取消菜单栏注释</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">menu:</span><br><span class="line">  home: / || fa fa-home</span><br><span class="line">  about: /about/ || fa fa-user</span><br><span class="line">  tags: /tags/ || fa fa-tags</span><br><span class="line">  categories: /categories/ || fa fa-th</span><br><span class="line">  archives: /archives/ || fa fa-archive</span><br><span class="line"><span class="meta">  #</span><span class="bash">schedule: /schedule/ || fa fa-calendar</span></span><br><span class="line"><span class="meta">  #</span><span class="bash">sitemap: /sitemap.xml || fa fa-sitemap</span></span><br><span class="line"><span class="meta">  #</span><span class="bash">commonweal: /404/ || fa fa-heartbeat</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>在终端窗口下，定位到 Hexo 站点目录下。使用 hexo new page 新建一个页面，命名为 tags ：</strong></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cd \hexoblog\maybe</span><br><span class="line">hexo new page tags</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>编辑刚新建的页面，将页面的类型设置为 tags ，主题将自动为这个页面显示标签云。页面内容如下：</strong></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: 标签</span><br><span class="line">date: 2021-06-19 14:42:32</span><br><span class="line">type: &quot;tags&quot;</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+
+
+
+<p>*<em><strong>注意：</strong>如果有集成评论服务，页面也会带有评论。 若需要关闭的话，请添加字段 <code>comments</code> 并将值设置为 <code>false</code>，如：</em>*</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: 标签</span><br><span class="line">date: 2021-06-19 14:42:32</span><br><span class="line">type: &quot;tags&quot;</span><br><span class="line">comments: false</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="3-头像修改"><a href="#3-头像修改" class="headerlink" title="3.头像修改"></a>3.头像修改</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">avatar:</span><br><span class="line">  url: /images/avatar.png</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="4-动态背景"><a href="#4-动态背景" class="headerlink" title="4.动态背景"></a>4.动态背景</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">canvas_ribbon:</span><br><span class="line">  enable: true</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="5-添加顶部加载条"><a href="#5-添加顶部加载条" class="headerlink" title="5.添加顶部加载条"></a>5.添加顶部加载条</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">nprogress:</span><br><span class="line">  enable: true</span><br><span class="line">  spinner: true</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h1 id="6-为博客加上萌萌的宠物"><a href="#6-为博客加上萌萌的宠物" class="headerlink" title="6.为博客加上萌萌的宠物"></a>6.为博客加上萌萌的宠物</h1><p><strong>在终端切换到你的博客的路径里，然后输入如下代码：</strong></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">npm install --save hexo-helper-live2d</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="7-添加搜索功能"><a href="#7-添加搜索功能" class="headerlink" title="7.添加搜索功能"></a>7.添加搜索功能</h1><p><strong>1、安装 hexo-generator-searchdb 插件</strong></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">npm install hexo-generator-searchdb --save</span><br></pre></td></tr></table></figure>
+<p><strong>2、打开 主题配置文件 找到Local search，将enable设置为true</strong></p>
+<h1 id="8-开启代码复制"><a href="#8-开启代码复制" class="headerlink" title="8.开启代码复制"></a>8.开启代码复制</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">codeblock:</span><br><span class="line">  copy_button:</span><br><span class="line">    enable: true</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="9-设置已读进度条"><a href="#9-设置已读进度条" class="headerlink" title="9.设置已读进度条"></a>9.设置已读进度条</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> Reading progress bar</span></span><br><span class="line">reading_progress:</span><br><span class="line">  enable: true</span><br><span class="line"><span class="meta">  #</span><span class="bash"> Available values: left | right</span></span><br><span class="line">  startAt: left</span><br><span class="line"><span class="meta">  #</span><span class="bash"> Available values: top | bottom</span></span><br><span class="line">  position: top</span><br><span class="line">  reversed: false</span><br><span class="line">  color: &quot;#37c6c0&quot;</span><br><span class="line">  height: 3px</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="10-打赏设置"><a href="#10-打赏设置" class="headerlink" title="10.打赏设置"></a>10.打赏设置</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">reward_settings:</span><br><span class="line"><span class="meta">  #</span><span class="bash"> If <span class="literal">true</span>, a donate button will be displayed <span class="keyword">in</span> every article by default.</span></span><br><span class="line">  enable: true</span><br><span class="line">  animation: true</span><br><span class="line">  comment: 请作者喝杯茶吧</span><br><span class="line"><span class="meta">  #</span><span class="bash">comment: Buy me a coffee</span></span><br><span class="line"></span><br><span class="line">reward:</span><br><span class="line">  wechatpay: /images/wechatpay.png</span><br><span class="line"><span class="meta">  #</span><span class="bash">alipay: /images/alipay.png</span></span><br><span class="line"><span class="meta">  #</span><span class="bash">paypal: /images/paypal.png</span></span><br><span class="line"><span class="meta">  #</span><span class="bash">bitcoin: /images/bitcoin.png</span></span><br><span class="line"> </span><br><span class="line">自己获取自己的支付收款码，放置在next/source/images中</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="11-自定义博客图标"><a href="#11-自定义博客图标" class="headerlink" title="11.自定义博客图标"></a>11.自定义博客图标</h1><p><strong>博客网站的图标可以在iconfont等网站选择和制作图标</strong></p>
+<p><strong>文件路径：\themes\next\source，images修改主题images下文件替换</strong></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">favicon:</span><br><span class="line">  small: /images/favicon-16x16-next.png</span><br><span class="line">  medium: /images/favicon-32x32-next.png</span><br><span class="line">  apple_touch_icon: /images/apple-touch-icon-next.png</span><br><span class="line">  safari_pinned_tab: /images/logo.svg</span><br><span class="line"><span class="meta">  #</span><span class="bash">android_manifest: /manifest.json</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="12-开启站点阅读时间"><a href="#12-开启站点阅读时间" class="headerlink" title="12.开启站点阅读时间"></a>12.开启站点阅读时间</h1><figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="string">npm</span> <span class="string">install</span> <span class="string">hexo-word-counter</span></span><br><span class="line"><span class="string">hexo</span> <span class="string">clean</span></span><br><span class="line"></span><br><span class="line"><span class="attr">symbols_count_time:</span></span><br><span class="line">  <span class="attr">separated_meta:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">item_text_total:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="12-1-页面阅读统计-不蒜子统计"><a href="#12-1-页面阅读统计-不蒜子统计" class="headerlink" title="12.1 页面阅读统计 不蒜子统计"></a>12.1 页面阅读统计 不蒜子统计</h2><figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">busuanzi_count:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">false</span>              	   <span class="comment"># 设true 开启</span></span><br><span class="line">  <span class="attr">total_visitors:</span> <span class="literal">true</span>      	   <span class="comment"># 总阅读人数（uv数）</span></span><br><span class="line">  <span class="attr">total_visitors_icon:</span> <span class="string">fa</span> <span class="string">fa-user</span>  <span class="comment"># 阅读总人数的图标</span></span><br><span class="line">  <span class="attr">total_views:</span> <span class="literal">true</span>         	   <span class="comment"># 总阅读次数（pv数）</span></span><br><span class="line">  <span class="attr">total_views_icon:</span> <span class="string">fa</span> <span class="string">fa-eye</span>      <span class="comment"># 阅读总次数的图标</span></span><br><span class="line">  <span class="attr">post_views:</span> <span class="literal">true</span>         		   <span class="comment"># 开启内容阅读次数</span></span><br><span class="line">  <span class="attr">post_views_icon:</span> <span class="string">far</span> <span class="string">fa-eye</span>      <span class="comment"># 内容页阅读数的图标</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="13-文章原创声明"><a href="#13-文章原创声明" class="headerlink" title="13.文章原创声明"></a>13.文章原创声明</h1><figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Creative Commons 4.0 International License.</span></span><br><span class="line"><span class="comment"># See: https://creativecommons.org/about/cclicenses/</span></span><br><span class="line"><span class="attr">creative_commons:</span></span><br><span class="line">  <span class="comment"># Available values: by | by-nc | by-nc-nd | by-nc-sa | by-nd | by-sa | cc-zero</span></span><br><span class="line">  <span class="attr">license:</span> <span class="string">by-nc-sa</span></span><br><span class="line">  <span class="comment"># Available values: big | small</span></span><br><span class="line">  <span class="attr">size:</span> <span class="string">small</span></span><br><span class="line">  <span class="attr">sidebar:</span> <span class="literal">false</span></span><br><span class="line">  <span class="attr">post:</span> <span class="literal">false</span></span><br><span class="line">  <span class="comment"># You can set a language value if you prefer a translated version of CC license, e.g. deed.zh</span></span><br><span class="line">  <span class="comment"># CC licenses are available in 39 languages, you can find the specific and correct abbreviation you need on https://creativecommons.org</span></span><br><span class="line">  <span class="attr">language:</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h1 id="14-修改底部标签样式"><a href="#14-修改底部标签样式" class="headerlink" title="14.修改底部标签样式"></a>14.修改底部标签样式</h1><figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Use icon instead of the symbol # to indicate the tag at the bottom of the post</span></span><br><span class="line"><span class="attr">tag_icon:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="15-显示当然浏览进度"><a href="#15-显示当然浏览进度" class="headerlink" title="15.显示当然浏览进度"></a>15.显示当然浏览进度</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">back2top:</span><br><span class="line">  enable: true							</span><br><span class="line"><span class="meta">  #</span><span class="bash"> Back to top <span class="keyword">in</span> sidebar.</span></span><br><span class="line">  sidebar: false</span><br><span class="line"><span class="meta">  #</span><span class="bash"> Scroll percent label <span class="keyword">in</span> b2t button.</span></span><br><span class="line">  scrollpercent: true					</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="16-鼠标点击特效"><a href="#16-鼠标点击特效" class="headerlink" title="16.鼠标点击特效"></a>16.鼠标点击特效</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">npm install next-theme/hexo-next-fireworks</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="17-GitHub-Fork-Me"><a href="#17-GitHub-Fork-Me" class="headerlink" title="17.GitHub Fork Me"></a>17.GitHub Fork Me</h1><figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># `Follow me on GitHub` banner in the top-right corner.</span></span><br><span class="line"><span class="attr">github_banner:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">permalink:</span> <span class="string">https://github.com/maybeYo</span></span><br><span class="line">  <span class="attr">title:</span> <span class="string">Follow</span> <span class="string">me</span> <span class="string">on</span> <span class="string">GitHub</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="18-bookmark"><a href="#18-bookmark" class="headerlink" title="18.bookmark"></a>18.bookmark</h1><p>Bookmark是一个插件，允许用户保存他们的阅读进度。用户只需单击页面左上角的书签图标即可保存滚动位置。当他们下次访问您的博客时，他们可以自动恢复每个页面的最后滚动位置。</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Bookmark Support</span></span><br><span class="line"><span class="attr">bookmark:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">false</span></span><br><span class="line">  <span class="comment"># Customize the color of the bookmark.</span></span><br><span class="line">  <span class="attr">color:</span> <span class="string">&quot;#222&quot;</span></span><br><span class="line">  <span class="comment"># If auto, save the reading progress when closing the page or clicking the bookmark-icon.</span></span><br><span class="line">  <span class="comment"># If manual, only save it by clicking the bookmark-icon.</span></span><br><span class="line">  <span class="attr">save:</span> <span class="string">auto</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="19-添加lazyload"><a href="#19-添加lazyload" class="headerlink" title="19.添加lazyload"></a>19.添加lazyload</h1><p>对于图片进行延迟加载，访问到图片位置时才去请求图片资源，这样可以提高博客的访问速度，节省流量。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git clone https://github.com/theme-next/theme-next-jquery-lazyload source/lib/jquery_laz</span><br></pre></td></tr></table></figure>
+
+
+
+<p>主题配置文件:</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Vanilla JavaScript plugin for lazyloading images.</span></span><br><span class="line"><span class="comment"># For more information: https://apoorv.pro/lozad.js/demo/</span></span><br><span class="line"><span class="attr">lazyload:</span> <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="20-主题及标题栏背景图"><a href="#20-主题及标题栏背景图" class="headerlink" title="20.主题及标题栏背景图"></a>20.主题及标题栏背景图</h1><blockquote>
+<p>首先主题配置文件取消注释</p>
+</blockquote>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">custom_file_path:</span></span><br><span class="line">  <span class="attr">style:</span> <span class="string">source/_data/styles.styl</span></span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>在路径~/hexo_blog/source/_data创建/修改 styles.styl文件，并添加以下内容</p>
+</blockquote>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">// 添加背景图片</span><br><span class="line">body &#123;</span><br><span class="line">      background: url(https://source.unsplash.com/random/1600x900?wallpapers);//自己喜欢的图片地址</span><br><span class="line">      background-size: cover;</span><br><span class="line">      background-repeat: no-repeat;</span><br><span class="line">      background-attachment: fixed;</span><br><span class="line">      background-position: 50% 50%;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// 标题栏背景</span><br><span class="line">.site-meta &#123;</span><br><span class="line">    padding: 20px 0;</span><br><span class="line">    color: #fff;</span><br><span class="line">    background: $blue;</span><br><span class="line">    background-repeat: no-repeat;</span><br><span class="line">    background-attachment:fixed;</span><br><span class="line">    background-position:center;</span><br><span class="line">    background-size:cover;</span><br><span class="line">&#125;  </span><br><span class="line"></span><br><span class="line">// 修改主体透明度</span><br><span class="line">.main-inner&#123;</span><br><span class="line">    background: #fff;</span><br><span class="line">    opacity: 0.95;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 修改菜单栏透明度，会引起本地搜索菜单bug</span><br><span class="line">//.header-inner &#123;</span><br><span class="line">//    opacity: 0.95;</span><br><span class="line">//&#125;</span><br><span class="line"></span><br><span class="line">// 主页文章添加阴影效果</span><br><span class="line">.post &#123;</span><br><span class="line">   margin-top: 60px;</span><br><span class="line">   margin-bottom: 60px;</span><br><span class="line">   padding: 25px;</span><br><span class="line">   -webkit-box-shadow: 0 0 5px rgba(202, 203, 203, .5);</span><br><span class="line">   -moz-box-shadow: 0 0 5px rgba(202, 203, 204, .5);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="21-主题及标题栏背景图"><a href="#21-主题及标题栏背景图" class="headerlink" title="21.主题及标题栏背景图"></a>21.主题及标题栏背景图</h1><p>首先主题配置文件取消注释</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">custom_file_path:</span></span><br><span class="line">  <span class="attr">style:</span> <span class="string">source/_data/styles.styl</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>在路径~/hexo_blog/source/_data创建/修改 styles.styl文件，并添加以下内容</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="string">//</span> <span class="string">添加背景图片</span></span><br><span class="line"><span class="string">body</span> &#123;</span><br><span class="line">      <span class="attr">background:</span> <span class="string">url(https://source.unsplash.com/random/1600x900?wallpapers);//自己喜欢的图片地址</span></span><br><span class="line">      <span class="attr">background-size:</span> <span class="string">cover;</span></span><br><span class="line">      <span class="attr">background-repeat:</span> <span class="literal">no</span><span class="string">-repeat;</span></span><br><span class="line">      <span class="attr">background-attachment:</span> <span class="string">fixed;</span></span><br><span class="line">      <span class="attr">background-position:</span> <span class="number">50</span><span class="string">%</span> <span class="number">50</span><span class="string">%;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="string">//</span> <span class="string">标题栏背景</span></span><br><span class="line"><span class="string">.site-meta</span> &#123;</span><br><span class="line">    <span class="attr">padding:</span> <span class="string">20px</span> <span class="number">0</span><span class="string">;</span></span><br><span class="line">    <span class="attr">color:</span> <span class="comment">#fff;</span></span><br><span class="line">    <span class="attr">background:</span> <span class="string">$blue;</span></span><br><span class="line">    <span class="attr">background-repeat:</span> <span class="literal">no</span><span class="string">-repeat;</span></span><br><span class="line">    <span class="string">background-attachment:fixed;</span></span><br><span class="line">    <span class="string">background-position:center;</span></span><br><span class="line">    <span class="string">background-size:cover;</span></span><br><span class="line">&#125;  </span><br><span class="line"></span><br><span class="line"><span class="string">//</span> <span class="string">修改主体透明度</span></span><br><span class="line"><span class="string">.main-inner&#123;</span></span><br><span class="line">    <span class="attr">background:</span> <span class="comment">#fff;</span></span><br><span class="line">    <span class="attr">opacity:</span> <span class="number">0.95</span><span class="string">;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="string">//</span> <span class="string">修改菜单栏透明度，会引起本地搜索菜单bug</span></span><br><span class="line"><span class="string">//.header-inner</span> &#123;</span><br><span class="line"><span class="string">//</span>    <span class="attr">opacity:</span> <span class="number">0.95</span><span class="string">;</span></span><br><span class="line"><span class="string">//</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="string">//</span> <span class="string">主页文章添加阴影效果</span></span><br><span class="line"><span class="string">.post</span> &#123;</span><br><span class="line">   <span class="attr">margin-top:</span> <span class="string">60px;</span></span><br><span class="line">   <span class="attr">margin-bottom:</span> <span class="string">60px;</span></span><br><span class="line">   <span class="attr">padding:</span> <span class="string">25px;</span></span><br><span class="line">   <span class="string">-webkit-box-shadow:</span> <span class="number">0</span> <span class="number">0</span> <span class="string">5px</span> <span class="string">rgba(202</span>, <span class="number">203</span>, <span class="number">203</span>, <span class="number">.5</span><span class="string">);</span></span><br><span class="line">   <span class="string">-moz-box-shadow:</span> <span class="number">0</span> <span class="number">0</span> <span class="string">5px</span> <span class="string">rgba(202</span>, <span class="number">203</span>, <span class="number">204</span>, <span class="number">.5</span><span class="string">);</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>NEXT</category>
+      </categories>
+      <tags>
+        <tag>NEXT</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Hello World</title>
     <url>/2021/06/19/hello-world/</url>
     <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
@@ -171,153 +318,6 @@
       </categories>
       <tags>
         <tag>k8s</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>hexo</title>
-    <url>/2021/06/20/NEXT/</url>
-    <content><![CDATA[<p>hexo 配置</p>
-<span id="more"></span>
-<p>参考地址<br><a href="http://theme-next.iissnan.com/theme-settings.html#rss">http://theme-next.iissnan.com/theme-settings.html#rss</a></p>
-<h1 id="1-Next主题风格"><a href="#1-Next主题风格" class="headerlink" title="1.Next主题风格"></a>1.Next主题风格</h1><p>Next提供了四中主题风格scheme，可以在主题配置文件_config.yml文件中进行选择</p>
-<p>分别是Muse、Mist、Pisces、Gemini</p>
-<p>默认时Muse主题，我用的是Gemini主题，所以把Muse注释掉，Gemini去掉注释</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> Schemes</span></span><br><span class="line"><span class="meta">#</span><span class="bash">scheme: Muse</span></span><br><span class="line"><span class="meta">#</span><span class="bash">scheme: Mist</span></span><br><span class="line"><span class="meta">#</span><span class="bash">scheme: Pisces</span></span><br><span class="line">scheme: Gemini</span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="2-设置菜单栏"><a href="#2-设置菜单栏" class="headerlink" title="2.设置菜单栏"></a>2.设置菜单栏</h1><h2 id="取消菜单栏注释"><a href="#取消菜单栏注释" class="headerlink" title="取消菜单栏注释"></a>取消菜单栏注释</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">menu:</span><br><span class="line">  home: / || fa fa-home</span><br><span class="line">  about: /about/ || fa fa-user</span><br><span class="line">  tags: /tags/ || fa fa-tags</span><br><span class="line">  categories: /categories/ || fa fa-th</span><br><span class="line">  archives: /archives/ || fa fa-archive</span><br><span class="line"><span class="meta">  #</span><span class="bash">schedule: /schedule/ || fa fa-calendar</span></span><br><span class="line"><span class="meta">  #</span><span class="bash">sitemap: /sitemap.xml || fa fa-sitemap</span></span><br><span class="line"><span class="meta">  #</span><span class="bash">commonweal: /404/ || fa fa-heartbeat</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-<p><strong>在终端窗口下，定位到 Hexo 站点目录下。使用 hexo new page 新建一个页面，命名为 tags ：</strong></p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">cd \hexoblog\maybe</span><br><span class="line">hexo new page tags</span><br></pre></td></tr></table></figure>
-
-
-
-<p><strong>编辑刚新建的页面，将页面的类型设置为 tags ，主题将自动为这个页面显示标签云。页面内容如下：</strong></p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: 标签</span><br><span class="line">date: 2021-06-19 14:42:32</span><br><span class="line">type: &quot;tags&quot;</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
-
-
-
-<p>*<em><strong>注意：</strong>如果有集成评论服务，页面也会带有评论。 若需要关闭的话，请添加字段 <code>comments</code> 并将值设置为 <code>false</code>，如：</em>*</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: 标签</span><br><span class="line">date: 2021-06-19 14:42:32</span><br><span class="line">type: &quot;tags&quot;</span><br><span class="line">comments: false</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="3-头像修改"><a href="#3-头像修改" class="headerlink" title="3.头像修改"></a>3.头像修改</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">avatar:</span><br><span class="line">  url: /images/avatar.png</span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="4-动态背景"><a href="#4-动态背景" class="headerlink" title="4.动态背景"></a>4.动态背景</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">canvas_ribbon:</span><br><span class="line">  enable: true</span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="5-添加顶部加载条"><a href="#5-添加顶部加载条" class="headerlink" title="5.添加顶部加载条"></a>5.添加顶部加载条</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">nprogress:</span><br><span class="line">  enable: true</span><br><span class="line">  spinner: true</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h1 id="6-为博客加上萌萌的宠物"><a href="#6-为博客加上萌萌的宠物" class="headerlink" title="6.为博客加上萌萌的宠物"></a>6.为博客加上萌萌的宠物</h1><p><strong>在终端切换到你的博客的路径里，然后输入如下代码：</strong></p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">npm install --save hexo-helper-live2d</span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="7-添加搜索功能"><a href="#7-添加搜索功能" class="headerlink" title="7.添加搜索功能"></a>7.添加搜索功能</h1><p><strong>1、安装 hexo-generator-searchdb 插件</strong></p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">npm install hexo-generator-searchdb --save</span><br></pre></td></tr></table></figure>
-<p><strong>2、打开 主题配置文件 找到Local search，将enable设置为true</strong></p>
-<h1 id="8-开启代码复制"><a href="#8-开启代码复制" class="headerlink" title="8.开启代码复制"></a>8.开启代码复制</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">codeblock:</span><br><span class="line">  copy_button:</span><br><span class="line">    enable: true</span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="9-设置已读进度条"><a href="#9-设置已读进度条" class="headerlink" title="9.设置已读进度条"></a>9.设置已读进度条</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> Reading progress bar</span></span><br><span class="line">reading_progress:</span><br><span class="line">  enable: true</span><br><span class="line"><span class="meta">  #</span><span class="bash"> Available values: left | right</span></span><br><span class="line">  startAt: left</span><br><span class="line"><span class="meta">  #</span><span class="bash"> Available values: top | bottom</span></span><br><span class="line">  position: top</span><br><span class="line">  reversed: false</span><br><span class="line">  color: &quot;#37c6c0&quot;</span><br><span class="line">  height: 3px</span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="10-打赏设置"><a href="#10-打赏设置" class="headerlink" title="10.打赏设置"></a>10.打赏设置</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">reward_settings:</span><br><span class="line"><span class="meta">  #</span><span class="bash"> If <span class="literal">true</span>, a donate button will be displayed <span class="keyword">in</span> every article by default.</span></span><br><span class="line">  enable: true</span><br><span class="line">  animation: true</span><br><span class="line">  comment: 请作者喝杯茶吧</span><br><span class="line"><span class="meta">  #</span><span class="bash">comment: Buy me a coffee</span></span><br><span class="line"></span><br><span class="line">reward:</span><br><span class="line">  wechatpay: /images/wechatpay.png</span><br><span class="line"><span class="meta">  #</span><span class="bash">alipay: /images/alipay.png</span></span><br><span class="line"><span class="meta">  #</span><span class="bash">paypal: /images/paypal.png</span></span><br><span class="line"><span class="meta">  #</span><span class="bash">bitcoin: /images/bitcoin.png</span></span><br><span class="line"> </span><br><span class="line">自己获取自己的支付收款码，放置在next/source/images中</span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="11-自定义博客图标"><a href="#11-自定义博客图标" class="headerlink" title="11.自定义博客图标"></a>11.自定义博客图标</h1><p><strong>博客网站的图标可以在iconfont等网站选择和制作图标</strong></p>
-<p><strong>文件路径：\themes\next\source，images修改主题images下文件替换</strong></p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">favicon:</span><br><span class="line">  small: /images/favicon-16x16-next.png</span><br><span class="line">  medium: /images/favicon-32x32-next.png</span><br><span class="line">  apple_touch_icon: /images/apple-touch-icon-next.png</span><br><span class="line">  safari_pinned_tab: /images/logo.svg</span><br><span class="line"><span class="meta">  #</span><span class="bash">android_manifest: /manifest.json</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="12-开启站点阅读时间"><a href="#12-开启站点阅读时间" class="headerlink" title="12.开启站点阅读时间"></a>12.开启站点阅读时间</h1><figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="string">npm</span> <span class="string">install</span> <span class="string">hexo-word-counter</span></span><br><span class="line"><span class="string">hexo</span> <span class="string">clean</span></span><br><span class="line"></span><br><span class="line"><span class="attr">symbols_count_time:</span></span><br><span class="line">  <span class="attr">separated_meta:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">item_text_total:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="12-1-页面阅读统计-不蒜子统计"><a href="#12-1-页面阅读统计-不蒜子统计" class="headerlink" title="12.1 页面阅读统计 不蒜子统计"></a>12.1 页面阅读统计 不蒜子统计</h2><figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">busuanzi_count:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">false</span>              	   <span class="comment"># 设true 开启</span></span><br><span class="line">  <span class="attr">total_visitors:</span> <span class="literal">true</span>      	   <span class="comment"># 总阅读人数（uv数）</span></span><br><span class="line">  <span class="attr">total_visitors_icon:</span> <span class="string">fa</span> <span class="string">fa-user</span>  <span class="comment"># 阅读总人数的图标</span></span><br><span class="line">  <span class="attr">total_views:</span> <span class="literal">true</span>         	   <span class="comment"># 总阅读次数（pv数）</span></span><br><span class="line">  <span class="attr">total_views_icon:</span> <span class="string">fa</span> <span class="string">fa-eye</span>      <span class="comment"># 阅读总次数的图标</span></span><br><span class="line">  <span class="attr">post_views:</span> <span class="literal">true</span>         		   <span class="comment"># 开启内容阅读次数</span></span><br><span class="line">  <span class="attr">post_views_icon:</span> <span class="string">far</span> <span class="string">fa-eye</span>      <span class="comment"># 内容页阅读数的图标</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="13-文章原创声明"><a href="#13-文章原创声明" class="headerlink" title="13.文章原创声明"></a>13.文章原创声明</h1><figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Creative Commons 4.0 International License.</span></span><br><span class="line"><span class="comment"># See: https://creativecommons.org/about/cclicenses/</span></span><br><span class="line"><span class="attr">creative_commons:</span></span><br><span class="line">  <span class="comment"># Available values: by | by-nc | by-nc-nd | by-nc-sa | by-nd | by-sa | cc-zero</span></span><br><span class="line">  <span class="attr">license:</span> <span class="string">by-nc-sa</span></span><br><span class="line">  <span class="comment"># Available values: big | small</span></span><br><span class="line">  <span class="attr">size:</span> <span class="string">small</span></span><br><span class="line">  <span class="attr">sidebar:</span> <span class="literal">false</span></span><br><span class="line">  <span class="attr">post:</span> <span class="literal">false</span></span><br><span class="line">  <span class="comment"># You can set a language value if you prefer a translated version of CC license, e.g. deed.zh</span></span><br><span class="line">  <span class="comment"># CC licenses are available in 39 languages, you can find the specific and correct abbreviation you need on https://creativecommons.org</span></span><br><span class="line">  <span class="attr">language:</span></span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h1 id="14-修改底部标签样式"><a href="#14-修改底部标签样式" class="headerlink" title="14.修改底部标签样式"></a>14.修改底部标签样式</h1><figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Use icon instead of the symbol # to indicate the tag at the bottom of the post</span></span><br><span class="line"><span class="attr">tag_icon:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="15-显示当然浏览进度"><a href="#15-显示当然浏览进度" class="headerlink" title="15.显示当然浏览进度"></a>15.显示当然浏览进度</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">back2top:</span><br><span class="line">  enable: true							</span><br><span class="line"><span class="meta">  #</span><span class="bash"> Back to top <span class="keyword">in</span> sidebar.</span></span><br><span class="line">  sidebar: false</span><br><span class="line"><span class="meta">  #</span><span class="bash"> Scroll percent label <span class="keyword">in</span> b2t button.</span></span><br><span class="line">  scrollpercent: true					</span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="16-鼠标点击特效"><a href="#16-鼠标点击特效" class="headerlink" title="16.鼠标点击特效"></a>16.鼠标点击特效</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">npm install next-theme/hexo-next-fireworks</span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="17-GitHub-Fork-Me"><a href="#17-GitHub-Fork-Me" class="headerlink" title="17.GitHub Fork Me"></a>17.GitHub Fork Me</h1><figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># `Follow me on GitHub` banner in the top-right corner.</span></span><br><span class="line"><span class="attr">github_banner:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">permalink:</span> <span class="string">https://github.com/maybeYo</span></span><br><span class="line">  <span class="attr">title:</span> <span class="string">Follow</span> <span class="string">me</span> <span class="string">on</span> <span class="string">GitHub</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="18-bookmark"><a href="#18-bookmark" class="headerlink" title="18.bookmark"></a>18.bookmark</h1><p>Bookmark是一个插件，允许用户保存他们的阅读进度。用户只需单击页面左上角的书签图标即可保存滚动位置。当他们下次访问您的博客时，他们可以自动恢复每个页面的最后滚动位置。</p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Bookmark Support</span></span><br><span class="line"><span class="attr">bookmark:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">false</span></span><br><span class="line">  <span class="comment"># Customize the color of the bookmark.</span></span><br><span class="line">  <span class="attr">color:</span> <span class="string">&quot;#222&quot;</span></span><br><span class="line">  <span class="comment"># If auto, save the reading progress when closing the page or clicking the bookmark-icon.</span></span><br><span class="line">  <span class="comment"># If manual, only save it by clicking the bookmark-icon.</span></span><br><span class="line">  <span class="attr">save:</span> <span class="string">auto</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="19-添加lazyload"><a href="#19-添加lazyload" class="headerlink" title="19.添加lazyload"></a>19.添加lazyload</h1><p>对于图片进行延迟加载，访问到图片位置时才去请求图片资源，这样可以提高博客的访问速度，节省流量。</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git clone https://github.com/theme-next/theme-next-jquery-lazyload source/lib/jquery_laz</span><br></pre></td></tr></table></figure>
-
-
-
-<p>主题配置文件:</p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Vanilla JavaScript plugin for lazyloading images.</span></span><br><span class="line"><span class="comment"># For more information: https://apoorv.pro/lozad.js/demo/</span></span><br><span class="line"><span class="attr">lazyload:</span> <span class="literal">false</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="20-主题及标题栏背景图"><a href="#20-主题及标题栏背景图" class="headerlink" title="20.主题及标题栏背景图"></a>20.主题及标题栏背景图</h1><blockquote>
-<p>首先主题配置文件取消注释</p>
-</blockquote>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">custom_file_path:</span></span><br><span class="line">  <span class="attr">style:</span> <span class="string">source/_data/styles.styl</span></span><br></pre></td></tr></table></figure>
-
-
-
-<blockquote>
-<p>在路径~/hexo_blog/source/_data创建/修改 styles.styl文件，并添加以下内容</p>
-</blockquote>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">// 添加背景图片</span><br><span class="line">body &#123;</span><br><span class="line">      background: url(https://source.unsplash.com/random/1600x900?wallpapers);//自己喜欢的图片地址</span><br><span class="line">      background-size: cover;</span><br><span class="line">      background-repeat: no-repeat;</span><br><span class="line">      background-attachment: fixed;</span><br><span class="line">      background-position: 50% 50%;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// 标题栏背景</span><br><span class="line">.site-meta &#123;</span><br><span class="line">    padding: 20px 0;</span><br><span class="line">    color: #fff;</span><br><span class="line">    background: $blue;</span><br><span class="line">    background-repeat: no-repeat;</span><br><span class="line">    background-attachment:fixed;</span><br><span class="line">    background-position:center;</span><br><span class="line">    background-size:cover;</span><br><span class="line">&#125;  </span><br><span class="line"></span><br><span class="line">// 修改主体透明度</span><br><span class="line">.main-inner&#123;</span><br><span class="line">    background: #fff;</span><br><span class="line">    opacity: 0.95;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 修改菜单栏透明度，会引起本地搜索菜单bug</span><br><span class="line">//.header-inner &#123;</span><br><span class="line">//    opacity: 0.95;</span><br><span class="line">//&#125;</span><br><span class="line"></span><br><span class="line">// 主页文章添加阴影效果</span><br><span class="line">.post &#123;</span><br><span class="line">   margin-top: 60px;</span><br><span class="line">   margin-bottom: 60px;</span><br><span class="line">   padding: 25px;</span><br><span class="line">   -webkit-box-shadow: 0 0 5px rgba(202, 203, 203, .5);</span><br><span class="line">   -moz-box-shadow: 0 0 5px rgba(202, 203, 204, .5);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="21-主题及标题栏背景图"><a href="#21-主题及标题栏背景图" class="headerlink" title="21.主题及标题栏背景图"></a>21.主题及标题栏背景图</h1><p>首先主题配置文件取消注释</p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">custom_file_path:</span></span><br><span class="line">  <span class="attr">style:</span> <span class="string">source/_data/styles.styl</span></span><br></pre></td></tr></table></figure>
-
-
-
-<p>在路径~/hexo_blog/source/_data创建/修改 styles.styl文件，并添加以下内容</p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="string">//</span> <span class="string">添加背景图片</span></span><br><span class="line"><span class="string">body</span> &#123;</span><br><span class="line">      <span class="attr">background:</span> <span class="string">url(https://source.unsplash.com/random/1600x900?wallpapers);//自己喜欢的图片地址</span></span><br><span class="line">      <span class="attr">background-size:</span> <span class="string">cover;</span></span><br><span class="line">      <span class="attr">background-repeat:</span> <span class="literal">no</span><span class="string">-repeat;</span></span><br><span class="line">      <span class="attr">background-attachment:</span> <span class="string">fixed;</span></span><br><span class="line">      <span class="attr">background-position:</span> <span class="number">50</span><span class="string">%</span> <span class="number">50</span><span class="string">%;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="string">//</span> <span class="string">标题栏背景</span></span><br><span class="line"><span class="string">.site-meta</span> &#123;</span><br><span class="line">    <span class="attr">padding:</span> <span class="string">20px</span> <span class="number">0</span><span class="string">;</span></span><br><span class="line">    <span class="attr">color:</span> <span class="comment">#fff;</span></span><br><span class="line">    <span class="attr">background:</span> <span class="string">$blue;</span></span><br><span class="line">    <span class="attr">background-repeat:</span> <span class="literal">no</span><span class="string">-repeat;</span></span><br><span class="line">    <span class="string">background-attachment:fixed;</span></span><br><span class="line">    <span class="string">background-position:center;</span></span><br><span class="line">    <span class="string">background-size:cover;</span></span><br><span class="line">&#125;  </span><br><span class="line"></span><br><span class="line"><span class="string">//</span> <span class="string">修改主体透明度</span></span><br><span class="line"><span class="string">.main-inner&#123;</span></span><br><span class="line">    <span class="attr">background:</span> <span class="comment">#fff;</span></span><br><span class="line">    <span class="attr">opacity:</span> <span class="number">0.95</span><span class="string">;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="string">//</span> <span class="string">修改菜单栏透明度，会引起本地搜索菜单bug</span></span><br><span class="line"><span class="string">//.header-inner</span> &#123;</span><br><span class="line"><span class="string">//</span>    <span class="attr">opacity:</span> <span class="number">0.95</span><span class="string">;</span></span><br><span class="line"><span class="string">//</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="string">//</span> <span class="string">主页文章添加阴影效果</span></span><br><span class="line"><span class="string">.post</span> &#123;</span><br><span class="line">   <span class="attr">margin-top:</span> <span class="string">60px;</span></span><br><span class="line">   <span class="attr">margin-bottom:</span> <span class="string">60px;</span></span><br><span class="line">   <span class="attr">padding:</span> <span class="string">25px;</span></span><br><span class="line">   <span class="string">-webkit-box-shadow:</span> <span class="number">0</span> <span class="number">0</span> <span class="string">5px</span> <span class="string">rgba(202</span>, <span class="number">203</span>, <span class="number">203</span>, <span class="number">.5</span><span class="string">);</span></span><br><span class="line">   <span class="string">-moz-box-shadow:</span> <span class="number">0</span> <span class="number">0</span> <span class="string">5px</span> <span class="string">rgba(202</span>, <span class="number">203</span>, <span class="number">204</span>, <span class="number">.5</span><span class="string">);</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>hexo</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
       </tags>
   </entry>
 </search>
