@@ -189,6 +189,56 @@
 ]]></content>
   </entry>
   <entry>
+    <title>next_SEO百度收录</title>
+    <url>/2021/07/16/next-SEO%E7%99%BE%E5%BA%A6%E6%94%B6%E5%BD%95/</url>
+    <content><![CDATA[<p>NEXT-SEO百度收录优化</p>
+<span id="more"></span>
+
+<p>参考百度：<a href="github%E5%8D%9A%E5%AE%A2hexo-next%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE%E7%99%BE%E5%BA%A6%E7%AB%99%E7%82%B9%E6%94%B6%E5%BD%95%E7%AE%A1%E7%90%86/">https://jingyan.baidu.com/article/a3761b2bf716631576f9aa3a.html</a></p>
+<h3 id="链接提交给百度"><a href="#链接提交给百度" class="headerlink" title="链接提交给百度"></a>链接提交给百度</h3><p>在百度中搜索自己博客的域名，如<a href="http://www.himmy.xn--cn%2Csite-jf7nh96s:www.himmy.cn，如果百度找不到该博客的相关信息就说明你的博客地址还未被百度收录，会有如下提示，按提示点击提交网站到相关页面就可以提交我们的博客地址/">www.himmy.cn，或者site:www.himmy.cn，如果百度找不到该博客的相关信息就说明你的博客地址还未被百度收录，会有如下提示，按提示点击提交网站到相关页面就可以提交我们的博客地址</a></p>
+<ul>
+<li>没有找到该URL。您可以直接访问 <a href="http://www.himmy.cn/">www.himmy.cn</a>，还可<a href="https://ziyuan.baidu.com/linksubmit/url">提交网址</a>给我们。</li>
+</ul>
+<h3 id="添加网站及验证所有权"><a href="#添加网站及验证所有权" class="headerlink" title="添加网站及验证所有权"></a>添加网站及验证所有权</h3><p>登录百度搜索资源平台，然后进入<a href="https://ziyuan.baidu.com/site">站点管理</a>页面，点击添加网站按钮添加我们的博客</p>
+<ul>
+<li>第一步：输入网站地址，如<a href="https://www.himmy.cn/">https://www.himmy.cn</a></li>
+<li>第二步：选择站点属性，最多可选三项，如影视动漫、信息技术等</li>
+<li>第三步：验证网站，就是验证网站的所有权，说明该网站是我们的，这是重点，下面详细说明</li>
+</ul>
+<p>验证网站有三种方式：文件验证、HTML标签验证、CNAME验证</p>
+<p><strong>文件验证</strong></p>
+<p>为保持验证通过的状态,成功验证后请不要删除HTML文件</p>
+<p>此处用的HTML标签验证</p>
+<p>在next主题配置文件中<code>\themes\next\layout\_partials\head\head.njk</code>粘贴验证标签</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">&#123;%- if theme<span class="selector-class">.baidu_site_verification</span> %&#125;</span><br><span class="line">    &lt;meta name=&quot;baidu-site-verification&quot; <span class="attribute">content</span>=&quot;<span class="selector-tag">code</span>-Z5xxxxx&quot; /&gt;</span><br><span class="line">&#123;%- endif %&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p><img src="next-SEO%E7%99%BE%E5%BA%A6%E6%94%B6%E5%BD%95.assets/image-20210716112445265.png" alt="image-20210716112445265"></p>
+<p><img src="next-SEO%E7%99%BE%E5%BA%A6%E6%94%B6%E5%BD%95.assets/image-20210716112208066.png" alt="image-20210716112208066"></p>
+<p>在next主题配置文件<code>\themes\next\_config.yaml</code>中修改</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Baidu Webmaster tools verification.</span></span><br><span class="line"><span class="comment"># See: https://ziyuan.baidu.com/site</span></span><br><span class="line"><span class="attr">baidu_site_verification:</span> <span class="string">Z5sxxxxxx</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>重新部署hexo</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">hexo clean all</span><br><span class="line">hexo g</span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure>
+
+
+
+<p>访问是否添加成功<a href="">view-source:https://maybeyo.github.io/</a></p>
+<p>完成验证</p>
+]]></content>
+      <categories>
+        <category>NEXT</category>
+      </categories>
+      <tags>
+        <tag>NEXT</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>kubeadm部署k8s</title>
     <url>/2021/06/20/kubeadm%E9%83%A8%E7%BD%B2k8s/</url>
     <content><![CDATA[<p>kubeadm是官方社区推出的一个用于快速部署kubernetes集群的工具。</p>
