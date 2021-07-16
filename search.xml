@@ -1,6 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Hello World</title>
+    <url>/2021/06/19/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<span id="more"></span>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+]]></content>
+  </entry>
+  <entry>
     <title>NEXT</title>
     <url>/2021/06/20/NEXT/</url>
     <content><![CDATA[<p>NEXT 配置修改</p>
@@ -170,25 +189,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Hello World</title>
-    <url>/2021/06/19/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<span id="more"></span>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-]]></content>
-  </entry>
-  <entry>
     <title>next_SEO百度收录</title>
     <url>/2021/07/16/next-SEO%E7%99%BE%E5%BA%A6%E6%94%B6%E5%BD%95/</url>
     <content><![CDATA[<p>NEXT-SEO百度收录优化</p>
@@ -214,22 +214,43 @@
 
 
 
-
-
-<p><img src="next-SEO%E7%99%BE%E5%BA%A6%E6%94%B6%E5%BD%95.assets/image-20210716112445265.png" alt="image-20210716112445265"></p>
-<p><img src="next-SEO%E7%99%BE%E5%BA%A6%E6%94%B6%E5%BD%95.assets/image-20210716112208066.png" alt="image-20210716112208066"></p>
 <p>在next主题配置文件<code>\themes\next\_config.yaml</code>中修改</p>
 <figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Baidu Webmaster tools verification.</span></span><br><span class="line"><span class="comment"># See: https://ziyuan.baidu.com/site</span></span><br><span class="line"><span class="attr">baidu_site_verification:</span> <span class="string">Z5sxxxxxx</span></span><br></pre></td></tr></table></figure>
 
 
 
-<p>重新部署hexo</p>
+
+
+<p>重新部署</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">hexo clean all</span><br><span class="line">hexo g</span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure>
 
 
 
 <p>访问是否添加成功<a href="">view-source:https://maybeyo.github.io/</a></p>
 <p>完成验证</p>
+<h3 id="链接提交：sitemap"><a href="#链接提交：sitemap" class="headerlink" title="链接提交：sitemap"></a>链接提交：sitemap</h3><p>安装sitemap生成器插件</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">npm install hexo-generator-sitemap --save</span><br><span class="line">npm install hexo-generator-baidu-sitemap --save</span><br></pre></td></tr></table></figure>
+
+
+
+<p>重新generate，会在public目录下生成<code>sitemap.xml</code>、<code>baidusitemap.xml</code>两个文件</p>
+<p>sitemap.xml文件内容</p>
+<p>重新部署</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">hexo clean all</span><br><span class="line">hexo g</span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure>
+
+
+
+<p>最后在自动提交-&gt;sitemap页面填入sitemap的地址</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">maybeyo<span class="selector-class">.github</span><span class="selector-class">.io</span>/sitemap<span class="selector-class">.xml</span></span><br><span class="line">maybeyo<span class="selector-class">.github</span><span class="selector-class">.io</span>/baidusitemap<span class="selector-class">.xml</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
 ]]></content>
       <categories>
         <category>NEXT</category>
