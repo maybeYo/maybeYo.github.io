@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://maybeyo.github.io.git/2021/07/28/activemq/</loc>
+    
+    <lastmod>2021-07-28</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://maybeyo.github.io.git/2021/07/20/hexo%E8%B5%84%E6%BA%90%E6%96%87%E4%BB%B6%E5%A4%B9/</loc>
     
     <lastmod>2021-07-20</lastmod>
@@ -74,7 +81,7 @@
 
   <url>
     <loc>https://maybeyo.github.io.git/</loc>
-    <lastmod>2021-07-20</lastmod>
+    <lastmod>2021-07-29</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -82,21 +89,35 @@
   
   <url>
     <loc>https://maybeyo.github.io.git/tags/NEXT/</loc>
-    <lastmod>2021-07-20</lastmod>
+    <lastmod>2021-07-29</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://maybeyo.github.io.git/tags/linux/</loc>
+    <lastmod>2021-07-29</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://maybeyo.github.io.git/tags/activemq/</loc>
+    <lastmod>2021-07-29</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://maybeyo.github.io.git/tags/hexo/</loc>
-    <lastmod>2021-07-20</lastmod>
+    <lastmod>2021-07-29</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://maybeyo.github.io.git/tags/k8s/</loc>
-    <lastmod>2021-07-20</lastmod>
+    <lastmod>2021-07-29</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
@@ -105,21 +126,28 @@
   
   <url>
     <loc>https://maybeyo.github.io.git/categories/NEXT/</loc>
-    <lastmod>2021-07-20</lastmod>
+    <lastmod>2021-07-29</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://maybeyo.github.io.git/categories/linux/</loc>
+    <lastmod>2021-07-29</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://maybeyo.github.io.git/categories/hexo/</loc>
-    <lastmod>2021-07-20</lastmod>
+    <lastmod>2021-07-29</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://maybeyo.github.io.git/categories/k8s/</loc>
-    <lastmod>2021-07-20</lastmod>
+    <lastmod>2021-07-29</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
