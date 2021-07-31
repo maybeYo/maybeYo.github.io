@@ -171,145 +171,6 @@
       </tags>
   </entry>
   <entry>
-    <title>activemq</title>
-    <url>/2021/07/28/activemq/</url>
-    <content><![CDATA[<p>activemq配置文件</p>
-<span id="more"></span>
-
-<p>​    在使用ActiveMQ的时候，一般会对其分配用户和角色来做基本的权限验证，本博文选择自带的JAAS Plugin来完成。本文中ActiveMQ版本选择5.16.0</p>
-<p>​    在LINUX上下载解压完ActiveMQ之后进入到conf目录下，其中有四个文件需要特别关注：</p>
-<ul>
-<li>login.config  - 登录配置</li>
-<li>users.properties - 用户密码配置</li>
-<li>groups.properties - 用户组配置</li>
-<li>activemq.xml - ActiveMQ实例配置</li>
-</ul>
-<h1 id="login-config"><a href="#login-config" class="headerlink" title="login.config"></a>login.config</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">activemq &#123;</span><br><span class="line">    org.apache.activemq.jaas.PropertiesLoginModule required</span><br><span class="line">        org.apache.activemq.jaas.properties.user=&quot;users.properties&quot;</span><br><span class="line">        org.apache.activemq.jaas.properties.group=&quot;groups.properties&quot;</span><br><span class="line">	reload=true;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<hr>
-<p>​    在没有设置<code>java.security.auth.login.config</code>属性时，会默认读取这个文件作为配置；可以看到该文件中，先是定义了一个节点名<code>activemq</code>，第二行表示使用的是<code>PropertiesLoginModule</code>来获取认证信息（其他的方式请参考官网），顾名思义就是从配置文件中读取，所以下面就配置了使用<code>users.properties</code>文件作为用户密码配置，使用<code>groups.properties</code>文件作为用户组配置。默认在当前文件同一目录中查找这两个文件。<code>reload=true</code>，表示可以在运行过程中更改<code>users.properties</code>，<code>groups.properties</code>文件内容，并动态刷新；<strong>不要忘了最后的</strong> <code>&quot;;&quot;</code>。</p>
-<hr>
-<h1 id="users-properties"><a href="#users-properties" class="headerlink" title="users.properties"></a>users.properties</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"><span class="comment"># username = password</span></span></span><br><span class="line">admin=admin</span><br><span class="line">wuser=wuser</span><br><span class="line">ruser=ruser</span><br></pre></td></tr></table></figure>
-
-<p>在该文件中定义用户，格式：用户名=密码；</p>
-<h1 id="groups-properties"><a href="#groups-properties" class="headerlink" title="groups.properties"></a>groups.properties</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"><span class="comment"># rolename = username1,username2</span></span></span><br><span class="line">admins=admin</span><br><span class="line">writes=wuser</span><br><span class="line">reads=ruser</span><br></pre></td></tr></table></figure>
-
-<p>在该文件中定义角色，格式：角色名=用户1，用户2…</p>
-<h1 id="activemq-xml"><a href="#activemq-xml" class="headerlink" title="activemq.xml"></a>activemq.xml</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">   &lt;persistenceAdapter&gt;</span><br><span class="line">       &lt;kahaDB directory=&quot;$&#123;activemq.data&#125;/kahadb&quot;/&gt;</span><br><span class="line">   &lt;/persistenceAdapter&gt;</span><br><span class="line"></span><br><span class="line">&lt;plugins&gt;</span><br><span class="line"></span><br><span class="line">&lt;!--  use JAAS to authenticate using the login.config file on the classpath to configure JAAS --&gt;</span><br><span class="line">	&lt;jaasAuthenticationPlugin configuration=&quot;activemq&quot; /&gt;</span><br><span class="line">&lt;!--  lets configure a destination based authorization mechanism --&gt;</span><br><span class="line">	&lt;authorizationPlugin&gt;</span><br><span class="line">	   &lt;map&gt;</span><br><span class="line">		&lt;authorizationMap&gt;</span><br><span class="line">			&lt;authorizationEntries&gt;</span><br><span class="line">				&lt;authorizationEntry topic=&quot;&gt;&quot; read=&quot;reads,writes&quot; write=&quot;writes&quot; admin=&quot;writes,admins&quot; /&gt;</span><br><span class="line">				&lt;authorizationEntry queue=&quot;&gt;&quot; read=&quot;reads,writes&quot; write=&quot;writes&quot; admin=&quot;writes,admins&quot; /&gt;</span><br><span class="line">				&lt;authorizationEntry topic=&quot;ActiveMQ.Advisory.&gt;&quot; read=&quot;reads,writes,admins&quot; write=&quot;reads,writes,admins&quot; admin=&quot;reads,writes,admins&quot;/&gt;</span><br><span class="line">				&lt;authorizationEntry queue=&quot;ActiveMQ.Advisory.&gt;&quot; read=&quot;reads,writes,admins&quot; write=&quot;reads,writes,admins&quot; admin=&quot;reads,writes,admins&quot;/&gt;</span><br><span class="line">			&lt;/authorizationEntries&gt;</span><br><span class="line">		&lt;/authorizationMap&gt;</span><br><span class="line">	   &lt;/map&gt;</span><br><span class="line">	&lt;/authorizationPlugin&gt;</span><br><span class="line">&lt;/plugins&gt;</span><br></pre></td></tr></table></figure>
-
-<hr>
-<p>​    主要是<code>plugins</code>节点，将其放置在persistenceAdapter节点下面，用于配置权限映射。</p>
-<p>​    其中<code>jaasAuthenticationPlugin</code>的<code>configuration</code>属性必须要在<code>login.config</code>文件中存在，上面介绍<code>login.config</code>文件时，定义了一个<code>activemq</code>的节点，所以此处同样需要设置为<code>activemq</code>。</p>
-<p>​    下面的authorizationEntry节点中</p>
-<hr>
-<h2 id="queue-topic"><a href="#queue-topic" class="headerlink" title="queue/topic"></a>queue/topic</h2><p>​    代表权限是作用在queue还是topic上，其值是一个通配符表达式，通配符表达式如下，用于匹配queue/topic的名字。</p>
-<table>
-<thead>
-<tr>
-<th>.</th>
-<th>分隔符;分隔名字,*,&gt;</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>*</td>
-<td>匹配任何字符</td>
-</tr>
-<tr>
-<td>&gt;</td>
-<td>任何字符直到末尾</td>
-</tr>
-</tbody></table>
-<p>例如:</p>
-<p>​    仅单个”&gt;” 和单个”*”都表示匹配全部</p>
-<p>​    “PREFIX.&gt;”或”PREFIX.*”都表示以PREFIX开头的中间以”.”分隔；可以匹配： PREFIX , PREFIX.1 , PREFIX.1.2 ；无法匹配： PREFIX1</p>
-<p>​    “PREFIX.*.SUFFIX”表示以PREFIX开头，以SUFFIX结尾；可以匹配：PREFIX.1.SUFFIX；无法匹配：PREFIX.1.2.SUFFIX，PREFIX.1.SUFFIX.2</p>
-<p>​    注意，如果要使用”&gt;”，那么一定要将其放在表达式的最后。具体信息可以访问<a href="https://activemq.apache.org/wildcards">官网</a>。</p>
-<h2 id="read-write-admin"><a href="#read-write-admin" class="headerlink" title="read/write/admin"></a>read/write/admin</h2><table>
-<thead>
-<tr>
-<th>属性</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>read</td>
-<td>查看和消费目的地数据</td>
-</tr>
-<tr>
-<td>write</td>
-<td>往目的地发送数据</td>
-</tr>
-<tr>
-<td>admin</td>
-<td>创建目的地</td>
-</tr>
-</tbody></table>
-<p>​    read/write/admin 其值是角色名，多个使用”,”分隔，角色名在groups.properties文件中配置。<strong>注意：如果目的地还没创建出来的话，拥有write权限的角色是无法往该目的地发送数据的。</strong></p>
-<hr>
-<p>​    以上，就是ActiveMQ的权限验证配置。如果是配置ActiveMQ WEB端的权限，则需要在jetty.xml 和 jetty-realm.xml中进行配置</p>
-<p>参考连接：<a href="https://blog.csdn.net/qq_38167579/article/details/115530052">CSDN    https://blog.csdn.net</a></p>
-]]></content>
-      <categories>
-        <category>linux</category>
-      </categories>
-      <tags>
-        <tag>linux</tag>
-        <tag>activemq</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Hello World</title>
-    <url>/2021/06/19/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<span id="more"></span>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-]]></content>
-  </entry>
-  <entry>
-    <title>hexo资源文件夹</title>
-    <url>/2021/07/20/hexo%E8%B5%84%E6%BA%90%E6%96%87%E4%BB%B6%E5%A4%B9/</url>
-    <content><![CDATA[<p>hexo资源文件夹</p>
-<span id="more"></span>
-
-<p>参考地址：<a href="https://hexo.io/zh-cn/docs/asset-folders">官方地址 hexo.io/zh-cn/docs/asset-folders</a></p>
-<p>​    资源（Asset）代表 <code>source</code> 文件夹中除了文章以外的所有文件，例如图片、CSS、JS 文件等。比方说，如果你的Hexo项目中只有少量图片，那最简单的方法就是将它们放在 <code>source/images</code> 文件夹中。然后通过类似于 <code>![](/images/image.jpg)</code> 的方法访问它们。</p>
-<p>对于那些想要更有规律地提供图片和其他资源以及想要将他们的资源分布在各个文章上的人来说，Hexo也提供了更组织化的方式来管理资源。这个稍微有些复杂但是管理资源非常方便的功能可以通过将 <code>config.yml</code> 文件中的 <code>post_asset_folder</code> 选项设为 <code>true</code> 来打开。</p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">_config.ymlpost_asset_folder:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
-
-<p>当资源文件管理功能打开后，Hexo将会在你每一次通过 <code>hexo new [layout] &lt;title&gt;</code> 命令创建新文章时自动创建一个文件夹。这个资源文件夹将会有与这个文章文件一样的名字。将所有与你的文章有关的资源放在这个关联文件夹中之后，你可以通过相对路径来引用它们，这样你就得到了一个更简单而且方便得多的工作流。</p>
-<h2 id="相对路径引用的标签插件"><a href="#相对路径引用的标签插件" class="headerlink" title="相对路径引用的标签插件"></a>相对路径引用的标签插件</h2><p>通过常规的 markdown 语法和相对路径来引用图片和其它资源可能会导致它们在存档页或者主页上显示不正确。在Hexo 2时代，社区创建了很多插件来解决这个问题。但是，随着Hexo 3 的发布，许多新的<a href="https://hexo.io/docs/tag-plugins#Include-Assets">标签插件</a>被加入到了核心代码中。这使得你可以更简单地在文章中引用你的资源。</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">&#123;% asset_path slug %&#125;</span><br><span class="line">&#123;% asset_img slug <span class="selector-attr">[title]</span> %&#125;</span><br><span class="line">&#123;% asset_link slug <span class="selector-attr">[title]</span> %&#125;</span><br></pre></td></tr></table></figure>
-
-<p>比如说：当你打开文章资源文件夹功能后，你把一个 <code>example.jpg</code> 图片放在了你的资源文件夹中，如果通过使用相对路径的常规 markdown 语法 <code>![](example.jpg)</code> ，它将 <em>不会</em> 出现在首页上。（但是它会在文章中按你期待的方式工作）</p>
-<p>正确的引用图片方式是使用下列的标签插件而不是 markdown ：</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">&#123;% asset_img example<span class="selector-class">.jpg</span> This is an example image %&#125;</span><br></pre></td></tr></table></figure>
-
-<p>通过这种方式，图片将会同时出现在文章和主页以及归档页中。</p>
-<h2 id="Embedding-an-image-using-markdown"><a href="#Embedding-an-image-using-markdown" class="headerlink" title="Embedding an image using markdown"></a>Embedding an image using markdown</h2><p><a href="https://github.com/hexojs/hexo-renderer-marked">hexo-renderer-marked</a> 3.1.0 introduced a new option that allows you to embed an image in markdown without using <code>asset_img</code> tag plugin.</p>
-<p>To enable:</p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">_config.ymlpost_asset_folder:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">marked:</span></span><br><span class="line">  <span class="attr">prependRoot:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">postAsset:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
-
-<p>Once enabled, an asset image will be automatically resolved to its corresponding post’s path. For example, “image.jpg” is located at “/2020/01/02/foo/image.jpg”, meaning it is an asset image of “/2020/01/02/foo/“ post, <code>![](image.jpg)</code> will be rendered as <code>&lt;img src=&quot;/2020/01/02/foo/image.jpg&quot;&gt;</code>.</p>
-]]></content>
-      <categories>
-        <category>hexo</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>NEXT-SEO</title>
     <url>/2021/07/16/NEXT-SEO/</url>
     <content><![CDATA[<p>NEXT-SEO</p>
@@ -387,6 +248,186 @@
       </categories>
       <tags>
         <tag>NEXT</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hello World</title>
+    <url>/2021/06/19/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<span id="more"></span>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>activemq</title>
+    <url>/2021/07/28/activemq/</url>
+    <content><![CDATA[<p>activemq配置文件</p>
+<span id="more"></span>
+
+<p>​    在使用ActiveMQ的时候，一般会对其分配用户和角色来做基本的权限验证，本博文选择自带的JAAS Plugin来完成。本文中ActiveMQ版本选择5.16.0</p>
+<p>​    在LINUX上下载解压完ActiveMQ之后进入到conf目录下，其中有四个文件需要特别关注：</p>
+<ul>
+<li>login.config  - 登录配置</li>
+<li>users.properties - 用户密码配置</li>
+<li>groups.properties - 用户组配置</li>
+<li>activemq.xml - ActiveMQ实例配置</li>
+</ul>
+<h1 id="login-config"><a href="#login-config" class="headerlink" title="login.config"></a>login.config</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">activemq &#123;</span><br><span class="line">    org.apache.activemq.jaas.PropertiesLoginModule required</span><br><span class="line">        org.apache.activemq.jaas.properties.user=&quot;users.properties&quot;</span><br><span class="line">        org.apache.activemq.jaas.properties.group=&quot;groups.properties&quot;</span><br><span class="line">	reload=true;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>​    在没有设置<code>java.security.auth.login.config</code>属性时，会默认读取这个文件作为配置；可以看到该文件中，先是定义了一个节点名<code>activemq</code>，第二行表示使用的是<code>PropertiesLoginModule</code>来获取认证信息（其他的方式请参考官网），顾名思义就是从配置文件中读取，所以下面就配置了使用<code>users.properties</code>文件作为用户密码配置，使用<code>groups.properties</code>文件作为用户组配置。默认在当前文件同一目录中查找这两个文件。<code>reload=true</code>，表示可以在运行过程中更改<code>users.properties</code>，<code>groups.properties</code>文件内容，并动态刷新；<strong>不要忘了最后的</strong> <code>&quot;;&quot;</code>。</p>
+<hr>
+<h1 id="users-properties"><a href="#users-properties" class="headerlink" title="users.properties"></a>users.properties</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"><span class="comment"># username = password</span></span></span><br><span class="line">admin=admin</span><br><span class="line">wuser=wuser</span><br><span class="line">ruser=ruser</span><br></pre></td></tr></table></figure>
+
+<p>在该文件中定义用户，格式：用户名=密码；</p>
+<h1 id="groups-properties"><a href="#groups-properties" class="headerlink" title="groups.properties"></a>groups.properties</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"><span class="comment"># rolename = username1,username2</span></span></span><br><span class="line">admins=admin</span><br><span class="line">writes=wuser</span><br><span class="line">reads=ruser</span><br></pre></td></tr></table></figure>
+
+<p>在该文件中定义角色，格式：角色名=用户1，用户2…</p>
+<h1 id="activemq-xml"><a href="#activemq-xml" class="headerlink" title="activemq.xml"></a>activemq.xml</h1><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">   &lt;persistenceAdapter&gt;</span><br><span class="line">       &lt;kahaDB directory=&quot;$&#123;activemq.data&#125;/kahadb&quot;/&gt;</span><br><span class="line">   &lt;/persistenceAdapter&gt;</span><br><span class="line"></span><br><span class="line">&lt;plugins&gt;</span><br><span class="line"></span><br><span class="line">&lt;!--  use JAAS to authenticate using the login.config file on the classpath to configure JAAS --&gt;</span><br><span class="line">	&lt;jaasAuthenticationPlugin configuration=&quot;activemq&quot; /&gt;</span><br><span class="line">&lt;!--  lets configure a destination based authorization mechanism --&gt;</span><br><span class="line">	&lt;authorizationPlugin&gt;</span><br><span class="line">	   &lt;map&gt;</span><br><span class="line">		&lt;authorizationMap&gt;</span><br><span class="line">			&lt;authorizationEntries&gt;</span><br><span class="line">				&lt;authorizationEntry topic=&quot;&gt;&quot; read=&quot;reads,writes&quot; write=&quot;writes&quot; admin=&quot;writes,admins&quot; /&gt;</span><br><span class="line">				&lt;authorizationEntry queue=&quot;&gt;&quot; read=&quot;reads,writes&quot; write=&quot;writes&quot; admin=&quot;writes,admins&quot; /&gt;</span><br><span class="line">				&lt;authorizationEntry topic=&quot;ActiveMQ.Advisory.&gt;&quot; read=&quot;reads,writes,admins&quot; write=&quot;reads,writes,admins&quot; admin=&quot;reads,writes,admins&quot;/&gt;</span><br><span class="line">				&lt;authorizationEntry queue=&quot;ActiveMQ.Advisory.&gt;&quot; read=&quot;reads,writes,admins&quot; write=&quot;reads,writes,admins&quot; admin=&quot;reads,writes,admins&quot;/&gt;</span><br><span class="line">			&lt;/authorizationEntries&gt;</span><br><span class="line">		&lt;/authorizationMap&gt;</span><br><span class="line">	   &lt;/map&gt;</span><br><span class="line">	&lt;/authorizationPlugin&gt;</span><br><span class="line">&lt;/plugins&gt;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>​    主要是<code>plugins</code>节点，将其放置在persistenceAdapter节点下面，用于配置权限映射。</p>
+<p>​    其中<code>jaasAuthenticationPlugin</code>的<code>configuration</code>属性必须要在<code>login.config</code>文件中存在，上面介绍<code>login.config</code>文件时，定义了一个<code>activemq</code>的节点，所以此处同样需要设置为<code>activemq</code>。</p>
+<p>​    下面的authorizationEntry节点中</p>
+<hr>
+<h2 id="queue-topic"><a href="#queue-topic" class="headerlink" title="queue/topic"></a>queue/topic</h2><p>​    代表权限是作用在queue还是topic上，其值是一个通配符表达式，通配符表达式如下，用于匹配queue/topic的名字。</p>
+<table>
+<thead>
+<tr>
+<th>.</th>
+<th>分隔符;分隔名字,*,&gt;</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>*</td>
+<td>匹配任何字符</td>
+</tr>
+<tr>
+<td>&gt;</td>
+<td>任何字符直到末尾</td>
+</tr>
+</tbody></table>
+<p>例如:</p>
+<p>​    仅单个”&gt;” 和单个”*”都表示匹配全部</p>
+<p>​    “PREFIX.&gt;”或”PREFIX.*”都表示以PREFIX开头的中间以”.”分隔；可以匹配： PREFIX , PREFIX.1 , PREFIX.1.2 ；无法匹配： PREFIX1</p>
+<p>​    “PREFIX.*.SUFFIX”表示以PREFIX开头，以SUFFIX结尾；可以匹配：PREFIX.1.SUFFIX；无法匹配：PREFIX.1.2.SUFFIX，PREFIX.1.SUFFIX.2</p>
+<p>​    注意，如果要使用”&gt;”，那么一定要将其放在表达式的最后。具体信息可以访问<a href="https://activemq.apache.org/wildcards">官网</a>。</p>
+<h2 id="read-write-admin"><a href="#read-write-admin" class="headerlink" title="read/write/admin"></a>read/write/admin</h2><table>
+<thead>
+<tr>
+<th>属性</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>read</td>
+<td>查看和消费目的地数据</td>
+</tr>
+<tr>
+<td>write</td>
+<td>往目的地发送数据</td>
+</tr>
+<tr>
+<td>admin</td>
+<td>创建目的地</td>
+</tr>
+</tbody></table>
+<p>​    read/write/admin 其值是角色名，多个使用”,”分隔，角色名在groups.properties文件中配置。<strong>注意：如果目的地还没创建出来的话，拥有write权限的角色是无法往该目的地发送数据的。</strong></p>
+<hr>
+<p>​    以上，就是ActiveMQ的权限验证配置。如果是配置ActiveMQ WEB端的权限，则需要在jetty.xml 和 jetty-realm.xml中进行配置</p>
+<h2 id="1-jetty-xml-配置-ActiveMQ-的web-Console-控制台端口"><a href="#1-jetty-xml-配置-ActiveMQ-的web-Console-控制台端口" class="headerlink" title="1. jetty.xml 配置 ActiveMQ 的web Console 控制台端口:"></a>1. jetty.xml 配置 ActiveMQ 的web Console 控制台端口:</h2><p>在<code>jetty.xml</code>文件中:</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">&lt;bean id=&quot;jettyPort&quot; class=&quot;org.apache.activemq.web.WebConsolePort&quot; init-method=&quot;start&quot;&gt;</span><br><span class="line">             &lt;!-- the default port number for the web console --&gt;</span><br><span class="line">        &lt;property name=&quot;host&quot; value=&quot;0.0.0.0&quot;/&gt;</span><br><span class="line">        &lt;property name=&quot;port&quot; value=&quot;8161&quot;/&gt;&lt;/bean&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="2-jetty-realm-properties-ActiveMQ-的-web-Console-控制台用户名密码配置"><a href="#2-jetty-realm-properties-ActiveMQ-的-web-Console-控制台用户名密码配置" class="headerlink" title="2. jetty-realm.properties ActiveMQ 的 web Console 控制台用户名密码配置:"></a>2. jetty-realm.properties ActiveMQ 的 web Console 控制台用户名密码配置:</h2><p>当登录 <a href="http://localhost:8161/">http://localhost:8161</a> 进入管理界面时,输入用户名密码配置在文件<code>jetty-realm.properties</code>中,添加一个用户为”aries”密码为”123”的管理员如下:</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> Defines users that can access the web (console, demo, etc.)</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> username: password [,rolename ...]</span></span><br><span class="line">admin: admin, admin</span><br><span class="line">user: user, user</span><br><span class="line">aries: 123, admin</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>第一列为用户名,第二列是密码,第三列表示角色。</p>
+<hr>
+<h2 id="3-设置MQ的持久化方式"><a href="#3-设置MQ的持久化方式" class="headerlink" title="3.设置MQ的持久化方式:"></a>3.设置MQ的持久化方式:</h2><p>ActiveMQ 默认使用 <code>KaHadb</code> 进行持久化消息存储, 配置在 <code>ActiveMQ.xml</code> 文件中:</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">&lt;persistenceAdapter&gt;</span><br><span class="line">            &lt;kahaDB directory=&quot;$&#123;activemq.data&#125;/kahadb&quot;/&gt;</span><br><span class="line">&lt;/persistenceAdapter&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<p> 现在我们将持久化存储方式修改为 <code>mysql</code> ,则修改上面的配置文件如下:</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">&lt;persistenceAdapter&gt;</span><br><span class="line"></span><br><span class="line">         &lt;jdbcPersistenceAdapter  dataSource=&quot;#derby-ds&quot;/&gt;</span><br><span class="line"></span><br><span class="line">&lt;/persistenceAdapter&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>同时添加<code>mysq数据源</code>的配置:</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">&lt;bean id=&quot;derby-ds&quot; class=&quot;org.apache.commons.dbcp.BasicDataSource&quot; destroy-method=&quot;close&quot;&gt;</span><br><span class="line">　　&lt;property name=&quot;driverClassName&quot; value=&quot;com.mysql.jdbc.Driver&quot;/&gt;</span><br><span class="line">　　&lt;property name=&quot;url&quot; value=&quot;jdbc:mysql://localhost:3306/activemq?relaxAutoCommit=true&quot;/&gt;</span><br><span class="line">　　&lt;property name=&quot;username&quot; value=&quot;root&quot;/&gt;</span><br><span class="line">　　&lt;property name=&quot;password&quot; value=&quot;123&quot;/&gt;</span><br><span class="line">　　&lt;property name=&quot;maxActive&quot; value=&quot;200&quot;/&gt;</span><br><span class="line">　　&lt;property name=&quot;poolPreparedStatements&quot; value=&quot;true&quot;/&gt;</span><br><span class="line">&lt;/bean&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>添加mysql驱动等依赖包到ActiveMQ的lib目录下:</p>
+<ul>
+<li><p>mysql-connector-<a href="http://lib.csdn.net/base/javase">Java</a>-5.1.30-bin.jar</p>
+</li>
+<li><p>commons-dbcp-1.4.jar</p>
+</li>
+<li><p>commons-pool-1.6.jar</p>
+</li>
+</ul>
+<p>​    在 mysql 中创建  activemq  数据库,然后启动 ActiveMQ，如果数据test库中生成 <code>activemq_acks</code>，<code>activemq_lock</code>，<code>activemq_msgs</code>三张表,则证明mysql持久化存储配置完成。</p>
+<h3 id="3-配置消息接收发送顺序按照优先级进行"><a href="#3-配置消息接收发送顺序按照优先级进行" class="headerlink" title="3.配置消息接收发送顺序按照优先级进行:"></a>3.配置消息接收发送顺序按照优先级进行:</h3><p>​    在发送消息的时候我们可以设置消息的优先级,来确定消息的接收顺序(对于单个MQ来说,如果是集群就不能确定优先级顺序了),优先级的使用需要在ActiveMQ.xml配置文件中进行开启:</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">&lt;policyEntry queue=&quot;&gt;&quot;  prioritizedMessages=&quot;true&quot; /&gt;  </span><br></pre></td></tr></table></figure>
+
+
+
+<p>参考连接：<a href="https://blog.csdn.net/qq_38167579/article/details/115530052">CSDN    https://blog.csdn.net</a></p>
+]]></content>
+      <categories>
+        <category>linux</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
+        <tag>activemq</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>hexo资源文件夹</title>
+    <url>/2021/07/20/hexo%E8%B5%84%E6%BA%90%E6%96%87%E4%BB%B6%E5%A4%B9/</url>
+    <content><![CDATA[<p>hexo资源文件夹</p>
+<span id="more"></span>
+
+<p>参考地址：<a href="https://hexo.io/zh-cn/docs/asset-folders">官方地址 hexo.io/zh-cn/docs/asset-folders</a></p>
+<p>​    资源（Asset）代表 <code>source</code> 文件夹中除了文章以外的所有文件，例如图片、CSS、JS 文件等。比方说，如果你的Hexo项目中只有少量图片，那最简单的方法就是将它们放在 <code>source/images</code> 文件夹中。然后通过类似于 <code>![](/images/image.jpg)</code> 的方法访问它们。</p>
+<p>对于那些想要更有规律地提供图片和其他资源以及想要将他们的资源分布在各个文章上的人来说，Hexo也提供了更组织化的方式来管理资源。这个稍微有些复杂但是管理资源非常方便的功能可以通过将 <code>config.yml</code> 文件中的 <code>post_asset_folder</code> 选项设为 <code>true</code> 来打开。</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">_config.ymlpost_asset_folder:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<p>当资源文件管理功能打开后，Hexo将会在你每一次通过 <code>hexo new [layout] &lt;title&gt;</code> 命令创建新文章时自动创建一个文件夹。这个资源文件夹将会有与这个文章文件一样的名字。将所有与你的文章有关的资源放在这个关联文件夹中之后，你可以通过相对路径来引用它们，这样你就得到了一个更简单而且方便得多的工作流。</p>
+<h2 id="相对路径引用的标签插件"><a href="#相对路径引用的标签插件" class="headerlink" title="相对路径引用的标签插件"></a>相对路径引用的标签插件</h2><p>通过常规的 markdown 语法和相对路径来引用图片和其它资源可能会导致它们在存档页或者主页上显示不正确。在Hexo 2时代，社区创建了很多插件来解决这个问题。但是，随着Hexo 3 的发布，许多新的<a href="https://hexo.io/docs/tag-plugins#Include-Assets">标签插件</a>被加入到了核心代码中。这使得你可以更简单地在文章中引用你的资源。</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">&#123;% asset_path slug %&#125;</span><br><span class="line">&#123;% asset_img slug <span class="selector-attr">[title]</span> %&#125;</span><br><span class="line">&#123;% asset_link slug <span class="selector-attr">[title]</span> %&#125;</span><br></pre></td></tr></table></figure>
+
+<p>比如说：当你打开文章资源文件夹功能后，你把一个 <code>example.jpg</code> 图片放在了你的资源文件夹中，如果通过使用相对路径的常规 markdown 语法 <code>![](example.jpg)</code> ，它将 <em>不会</em> 出现在首页上。（但是它会在文章中按你期待的方式工作）</p>
+<p>正确的引用图片方式是使用下列的标签插件而不是 markdown ：</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">&#123;% asset_img example<span class="selector-class">.jpg</span> This is an example image %&#125;</span><br></pre></td></tr></table></figure>
+
+<p>通过这种方式，图片将会同时出现在文章和主页以及归档页中。</p>
+<h2 id="Embedding-an-image-using-markdown"><a href="#Embedding-an-image-using-markdown" class="headerlink" title="Embedding an image using markdown"></a>Embedding an image using markdown</h2><p><a href="https://github.com/hexojs/hexo-renderer-marked">hexo-renderer-marked</a> 3.1.0 introduced a new option that allows you to embed an image in markdown without using <code>asset_img</code> tag plugin.</p>
+<p>To enable:</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">_config.ymlpost_asset_folder:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">marked:</span></span><br><span class="line">  <span class="attr">prependRoot:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">postAsset:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<p>Once enabled, an asset image will be automatically resolved to its corresponding post’s path. For example, “image.jpg” is located at “/2020/01/02/foo/image.jpg”, meaning it is an asset image of “/2020/01/02/foo/“ post, <code>![](image.jpg)</code> will be rendered as <code>&lt;img src=&quot;/2020/01/02/foo/image.jpg&quot;&gt;</code>.</p>
+]]></content>
+      <categories>
+        <category>hexo</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
       </tags>
   </entry>
   <entry>
