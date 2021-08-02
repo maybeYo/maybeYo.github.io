@@ -1,6 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>NEXT-SEO</title>
+    <url>/2021/07/16/NEXT-SEO/</url>
+    <content><![CDATA[<p>NEXT-SEO</p>
+<span id="more"></span>
+
+
+
+<p>参考链接：<a href="https://jingyan.baidu.com/article/a3761b2bf716631576f9aa3a.html">百度链接：jingyan.baidu.com</a></p>
+<p>参考链接：<a href="https://www.himmy.cn/2019/07/06/hexo%E5%8D%9A%E5%AE%A2%E7%99%BE%E5%BA%A6%E6%94%B6%E5%BD%95/">博客链接：www.himmy.cn</a></p>
+<h3 id="链接提交给百度"><a href="#链接提交给百度" class="headerlink" title="链接提交给百度"></a>链接提交给百度</h3><p>在百度中搜索自己博客的域名，如：<a href="https://maybeyo.github.io//">mabeyo.github.io</a>，或者<a href="https://maybeyo.github.io/">site:mabeyo.github.io</a>，如果百度找不到该博客的相关信息就说明你的博客地址还未被百度收录，会有如下提示，按提示点击提交网站到相关页面就可以提交我们的博客地址</p>
+<ul>
+<li>没有找到该URL。您可以直接访问 <a href="https://maybeyo.github.io/">mabeyo.github.io</a>，还可<a href="https://ziyuan.baidu.com/linksubmit/url">提交网址</a>给我们。</li>
+</ul>
+<h3 id="添加网站及验证所有权"><a href="#添加网站及验证所有权" class="headerlink" title="添加网站及验证所有权"></a>添加网站及验证所有权</h3><p>登录百度搜索资源平台，然后进入<a href="https://ziyuan.baidu.com/site">站点管理</a>页面，点击添加网站按钮添加我们的博客</p>
+<ul>
+<li>第一步：输入网站地址，如 <a href="https://maybeyo.github.io//">mabeyo.github.io</a></li>
+<li>第二步：选择站点属性，最多可选三项，如影视动漫、信息技术等</li>
+<li>第三步：验证网站，就是验证网站的所有权，说明该网站是我们的，这是重点，下面详细说明</li>
+</ul>
+<p>验证网站有三种方式：文件验证、HTML标签验证、CNAME验证</p>
+<p><strong>文件验证</strong></p>
+<p>为保持验证通过的状态,成功验证后请不要删除HTML文件</p>
+<p>此处用的HTML标签验证</p>
+<p>在next主题配置文件中<code>\themes\next\layout\_partials\head\head.njk</code>粘贴验证标签</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">&#123;%- if theme<span class="selector-class">.baidu_site_verification</span> %&#125;</span><br><span class="line">    &lt;meta name=&quot;baidu-site-verification&quot; <span class="attribute">content</span>=&quot;<span class="selector-tag">code</span>-Z5xxxxx&quot; /&gt;</span><br><span class="line">&#123;%- endif %&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>在next主题配置文件<code>\themes\next\_config.yaml</code>中修改</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Baidu Webmaster tools verification.</span></span><br><span class="line"><span class="comment"># See: https://ziyuan.baidu.com/site</span></span><br><span class="line"><span class="attr">baidu_site_verification:</span> <span class="string">Z5sxxxxxx</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p>重新部署</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">hexo clean all</span><br><span class="line">hexo g</span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure>
+
+
+
+<p>访问是否添加成功 <a href="view-source:https://maybeyo.github.io/">view-source:https://maybeyo.github.io/</a></p>
+<p>完成验证</p>
+<h3 id="链接提交：sitemap"><a href="#链接提交：sitemap" class="headerlink" title="链接提交：sitemap"></a>链接提交：sitemap</h3><p>安装sitemap生成器插件</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">npm install hexo-generator-sitemap --save</span><br><span class="line">npm install hexo-generator-baidu-sitemap --save</span><br></pre></td></tr></table></figure>
+
+
+
+<p>重新generate，会在public目录下生成<code>sitemap.xml</code>、<code>baidusitemap.xml</code>两个文件</p>
+<p>sitemap.xml文件内容</p>
+<p>重新部署</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">hexo clean all</span><br><span class="line">hexo g</span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure>
+
+
+
+<p>最后在自动提交-&gt;sitemap页面填入sitemap的地址</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">maybeyo<span class="selector-class">.github</span><span class="selector-class">.io</span>/sitemap<span class="selector-class">.xml</span></span><br><span class="line">maybeyo<span class="selector-class">.github</span><span class="selector-class">.io</span>/baidusitemap<span class="selector-class">.xml</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+]]></content>
+      <categories>
+        <category>NEXT</category>
+      </categories>
+      <tags>
+        <tag>NEXT</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>NEXT</title>
     <url>/2021/06/20/NEXT/</url>
     <content><![CDATA[<p>NEXT 配置修改</p>
@@ -171,105 +251,6 @@
       </tags>
   </entry>
   <entry>
-    <title>NEXT-SEO</title>
-    <url>/2021/07/16/NEXT-SEO/</url>
-    <content><![CDATA[<p>NEXT-SEO</p>
-<span id="more"></span>
-
-
-
-<p>参考链接：<a href="https://jingyan.baidu.com/article/a3761b2bf716631576f9aa3a.html">百度链接：jingyan.baidu.com</a></p>
-<p>参考链接：<a href="https://www.himmy.cn/2019/07/06/hexo%E5%8D%9A%E5%AE%A2%E7%99%BE%E5%BA%A6%E6%94%B6%E5%BD%95/">博客链接：www.himmy.cn</a></p>
-<h3 id="链接提交给百度"><a href="#链接提交给百度" class="headerlink" title="链接提交给百度"></a>链接提交给百度</h3><p>在百度中搜索自己博客的域名，如：<a href="https://maybeyo.github.io//">mabeyo.github.io</a>，或者<a href="https://maybeyo.github.io/">site:mabeyo.github.io</a>，如果百度找不到该博客的相关信息就说明你的博客地址还未被百度收录，会有如下提示，按提示点击提交网站到相关页面就可以提交我们的博客地址</p>
-<ul>
-<li>没有找到该URL。您可以直接访问 <a href="https://maybeyo.github.io/">mabeyo.github.io</a>，还可<a href="https://ziyuan.baidu.com/linksubmit/url">提交网址</a>给我们。</li>
-</ul>
-<h3 id="添加网站及验证所有权"><a href="#添加网站及验证所有权" class="headerlink" title="添加网站及验证所有权"></a>添加网站及验证所有权</h3><p>登录百度搜索资源平台，然后进入<a href="https://ziyuan.baidu.com/site">站点管理</a>页面，点击添加网站按钮添加我们的博客</p>
-<ul>
-<li>第一步：输入网站地址，如 <a href="https://maybeyo.github.io//">mabeyo.github.io</a></li>
-<li>第二步：选择站点属性，最多可选三项，如影视动漫、信息技术等</li>
-<li>第三步：验证网站，就是验证网站的所有权，说明该网站是我们的，这是重点，下面详细说明</li>
-</ul>
-<p>验证网站有三种方式：文件验证、HTML标签验证、CNAME验证</p>
-<p><strong>文件验证</strong></p>
-<p>为保持验证通过的状态,成功验证后请不要删除HTML文件</p>
-<p>此处用的HTML标签验证</p>
-<p>在next主题配置文件中<code>\themes\next\layout\_partials\head\head.njk</code>粘贴验证标签</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">&#123;%- if theme<span class="selector-class">.baidu_site_verification</span> %&#125;</span><br><span class="line">    &lt;meta name=&quot;baidu-site-verification&quot; <span class="attribute">content</span>=&quot;<span class="selector-tag">code</span>-Z5xxxxx&quot; /&gt;</span><br><span class="line">&#123;%- endif %&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>在next主题配置文件<code>\themes\next\_config.yaml</code>中修改</p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Baidu Webmaster tools verification.</span></span><br><span class="line"><span class="comment"># See: https://ziyuan.baidu.com/site</span></span><br><span class="line"><span class="attr">baidu_site_verification:</span> <span class="string">Z5sxxxxxx</span></span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<p>重新部署</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">hexo clean all</span><br><span class="line">hexo g</span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure>
-
-
-
-<p>访问是否添加成功 <a href="view-source:https://maybeyo.github.io/">view-source:https://maybeyo.github.io/</a></p>
-<p>完成验证</p>
-<h3 id="链接提交：sitemap"><a href="#链接提交：sitemap" class="headerlink" title="链接提交：sitemap"></a>链接提交：sitemap</h3><p>安装sitemap生成器插件</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">npm install hexo-generator-sitemap --save</span><br><span class="line">npm install hexo-generator-baidu-sitemap --save</span><br></pre></td></tr></table></figure>
-
-
-
-<p>重新generate，会在public目录下生成<code>sitemap.xml</code>、<code>baidusitemap.xml</code>两个文件</p>
-<p>sitemap.xml文件内容</p>
-<p>重新部署</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">hexo clean all</span><br><span class="line">hexo g</span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure>
-
-
-
-<p>最后在自动提交-&gt;sitemap页面填入sitemap的地址</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">maybeyo<span class="selector-class">.github</span><span class="selector-class">.io</span>/sitemap<span class="selector-class">.xml</span></span><br><span class="line">maybeyo<span class="selector-class">.github</span><span class="selector-class">.io</span>/baidusitemap<span class="selector-class">.xml</span></span><br></pre></td></tr></table></figure>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-]]></content>
-      <categories>
-        <category>NEXT</category>
-      </categories>
-      <tags>
-        <tag>NEXT</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Hello World</title>
-    <url>/2021/06/19/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<span id="more"></span>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-]]></content>
-  </entry>
-  <entry>
     <title>activemq</title>
     <url>/2021/07/28/activemq/</url>
     <content><![CDATA[<p>activemq配置文件</p>
@@ -398,37 +379,23 @@
       </tags>
   </entry>
   <entry>
-    <title>hexo资源文件夹</title>
-    <url>/2021/07/20/hexo%E8%B5%84%E6%BA%90%E6%96%87%E4%BB%B6%E5%A4%B9/</url>
-    <content><![CDATA[<p>hexo资源文件夹</p>
+    <title>Hello World</title>
+    <url>/2021/06/19/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
 <span id="more"></span>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
 
-<p>参考地址：<a href="https://hexo.io/zh-cn/docs/asset-folders">官方地址 hexo.io/zh-cn/docs/asset-folders</a></p>
-<p>​    资源（Asset）代表 <code>source</code> 文件夹中除了文章以外的所有文件，例如图片、CSS、JS 文件等。比方说，如果你的Hexo项目中只有少量图片，那最简单的方法就是将它们放在 <code>source/images</code> 文件夹中。然后通过类似于 <code>![](/images/image.jpg)</code> 的方法访问它们。</p>
-<p>对于那些想要更有规律地提供图片和其他资源以及想要将他们的资源分布在各个文章上的人来说，Hexo也提供了更组织化的方式来管理资源。这个稍微有些复杂但是管理资源非常方便的功能可以通过将 <code>config.yml</code> 文件中的 <code>post_asset_folder</code> 选项设为 <code>true</code> 来打开。</p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">_config.ymlpost_asset_folder:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
 
-<p>当资源文件管理功能打开后，Hexo将会在你每一次通过 <code>hexo new [layout] &lt;title&gt;</code> 命令创建新文章时自动创建一个文件夹。这个资源文件夹将会有与这个文章文件一样的名字。将所有与你的文章有关的资源放在这个关联文件夹中之后，你可以通过相对路径来引用它们，这样你就得到了一个更简单而且方便得多的工作流。</p>
-<h2 id="相对路径引用的标签插件"><a href="#相对路径引用的标签插件" class="headerlink" title="相对路径引用的标签插件"></a>相对路径引用的标签插件</h2><p>通过常规的 markdown 语法和相对路径来引用图片和其它资源可能会导致它们在存档页或者主页上显示不正确。在Hexo 2时代，社区创建了很多插件来解决这个问题。但是，随着Hexo 3 的发布，许多新的<a href="https://hexo.io/docs/tag-plugins#Include-Assets">标签插件</a>被加入到了核心代码中。这使得你可以更简单地在文章中引用你的资源。</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">&#123;% asset_path slug %&#125;</span><br><span class="line">&#123;% asset_img slug <span class="selector-attr">[title]</span> %&#125;</span><br><span class="line">&#123;% asset_link slug <span class="selector-attr">[title]</span> %&#125;</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
 
-<p>比如说：当你打开文章资源文件夹功能后，你把一个 <code>example.jpg</code> 图片放在了你的资源文件夹中，如果通过使用相对路径的常规 markdown 语法 <code>![](example.jpg)</code> ，它将 <em>不会</em> 出现在首页上。（但是它会在文章中按你期待的方式工作）</p>
-<p>正确的引用图片方式是使用下列的标签插件而不是 markdown ：</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">&#123;% asset_img example<span class="selector-class">.jpg</span> This is an example image %&#125;</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
 
-<p>通过这种方式，图片将会同时出现在文章和主页以及归档页中。</p>
-<h2 id="Embedding-an-image-using-markdown"><a href="#Embedding-an-image-using-markdown" class="headerlink" title="Embedding an image using markdown"></a>Embedding an image using markdown</h2><p><a href="https://github.com/hexojs/hexo-renderer-marked">hexo-renderer-marked</a> 3.1.0 introduced a new option that allows you to embed an image in markdown without using <code>asset_img</code> tag plugin.</p>
-<p>To enable:</p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">_config.ymlpost_asset_folder:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">marked:</span></span><br><span class="line">  <span class="attr">prependRoot:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">postAsset:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
-
-<p>Once enabled, an asset image will be automatically resolved to its corresponding post’s path. For example, “image.jpg” is located at “/2020/01/02/foo/image.jpg”, meaning it is an asset image of “/2020/01/02/foo/“ post, <code>![](image.jpg)</code> will be rendered as <code>&lt;img src=&quot;/2020/01/02/foo/image.jpg&quot;&gt;</code>.</p>
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
 ]]></content>
-      <categories>
-        <category>hexo</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-      </tags>
   </entry>
   <entry>
     <title>k8s常见总结</title>
@@ -467,6 +434,93 @@
         <category>k8s</category>
       </categories>
       <tags>
+        <tag>k8s</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>hexo资源文件夹</title>
+    <url>/2021/07/20/hexo%E8%B5%84%E6%BA%90%E6%96%87%E4%BB%B6%E5%A4%B9/</url>
+    <content><![CDATA[<p>hexo资源文件夹</p>
+<span id="more"></span>
+
+<p>参考地址：<a href="https://hexo.io/zh-cn/docs/asset-folders">官方地址 hexo.io/zh-cn/docs/asset-folders</a></p>
+<p>​    资源（Asset）代表 <code>source</code> 文件夹中除了文章以外的所有文件，例如图片、CSS、JS 文件等。比方说，如果你的Hexo项目中只有少量图片，那最简单的方法就是将它们放在 <code>source/images</code> 文件夹中。然后通过类似于 <code>![](/images/image.jpg)</code> 的方法访问它们。</p>
+<p>对于那些想要更有规律地提供图片和其他资源以及想要将他们的资源分布在各个文章上的人来说，Hexo也提供了更组织化的方式来管理资源。这个稍微有些复杂但是管理资源非常方便的功能可以通过将 <code>config.yml</code> 文件中的 <code>post_asset_folder</code> 选项设为 <code>true</code> 来打开。</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">_config.ymlpost_asset_folder:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<p>当资源文件管理功能打开后，Hexo将会在你每一次通过 <code>hexo new [layout] &lt;title&gt;</code> 命令创建新文章时自动创建一个文件夹。这个资源文件夹将会有与这个文章文件一样的名字。将所有与你的文章有关的资源放在这个关联文件夹中之后，你可以通过相对路径来引用它们，这样你就得到了一个更简单而且方便得多的工作流。</p>
+<h2 id="相对路径引用的标签插件"><a href="#相对路径引用的标签插件" class="headerlink" title="相对路径引用的标签插件"></a>相对路径引用的标签插件</h2><p>通过常规的 markdown 语法和相对路径来引用图片和其它资源可能会导致它们在存档页或者主页上显示不正确。在Hexo 2时代，社区创建了很多插件来解决这个问题。但是，随着Hexo 3 的发布，许多新的<a href="https://hexo.io/docs/tag-plugins#Include-Assets">标签插件</a>被加入到了核心代码中。这使得你可以更简单地在文章中引用你的资源。</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">&#123;% asset_path slug %&#125;</span><br><span class="line">&#123;% asset_img slug <span class="selector-attr">[title]</span> %&#125;</span><br><span class="line">&#123;% asset_link slug <span class="selector-attr">[title]</span> %&#125;</span><br></pre></td></tr></table></figure>
+
+<p>比如说：当你打开文章资源文件夹功能后，你把一个 <code>example.jpg</code> 图片放在了你的资源文件夹中，如果通过使用相对路径的常规 markdown 语法 <code>![](example.jpg)</code> ，它将 <em>不会</em> 出现在首页上。（但是它会在文章中按你期待的方式工作）</p>
+<p>正确的引用图片方式是使用下列的标签插件而不是 markdown ：</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">&#123;% asset_img example<span class="selector-class">.jpg</span> This is an example image %&#125;</span><br></pre></td></tr></table></figure>
+
+<p>通过这种方式，图片将会同时出现在文章和主页以及归档页中。</p>
+<h2 id="Embedding-an-image-using-markdown"><a href="#Embedding-an-image-using-markdown" class="headerlink" title="Embedding an image using markdown"></a>Embedding an image using markdown</h2><p><a href="https://github.com/hexojs/hexo-renderer-marked">hexo-renderer-marked</a> 3.1.0 introduced a new option that allows you to embed an image in markdown without using <code>asset_img</code> tag plugin.</p>
+<p>To enable:</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">_config.ymlpost_asset_folder:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">marked:</span></span><br><span class="line">  <span class="attr">prependRoot:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">postAsset:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<p>Once enabled, an asset image will be automatically resolved to its corresponding post’s path. For example, “image.jpg” is located at “/2020/01/02/foo/image.jpg”, meaning it is an asset image of “/2020/01/02/foo/“ post, <code>![](image.jpg)</code> will be rendered as <code>&lt;img src=&quot;/2020/01/02/foo/image.jpg&quot;&gt;</code>.</p>
+]]></content>
+      <categories>
+        <category>hexo</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>k8s集群加入与删除</title>
+    <url>/2021/08/02/k8s%E9%9B%86%E7%BE%A4%E5%8A%A0%E5%85%A5%E4%B8%8E%E5%88%A0%E9%99%A4/</url>
+    <content><![CDATA[<p>k8s集群加入与删除</p>
+<span id="more"></span>
+
+<h1 id="1-添加节点"><a href="#1-添加节点" class="headerlink" title="1.添加节点"></a>1.添加节点</h1><blockquote>
+<p>通过kubeadm初始化后，都会提供node加入的token:<br>默认token的有效期为24小时，当过期之后，该token就不可用了。</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> master 上重新生成新的 token</span></span><br><span class="line">[root@k8s-master ~]# kubeadm token create --print-join-command</span><br><span class="line">kubeadm join 192.168.81.57:6443 --token xv27mz.zx9qvxzr1n9ver8b     --discovery-token-ca-cert-hash sha256:e79022dddd20ebaa3304fe62856393cb58a5b5b6e42e51333224e1841bbf49eb </span><br><span class="line">[root@k8s-master ~]# kubeadm token list</span><br><span class="line">TOKEN                     TTL         EXPIRES                     USAGES                   DESCRIPTION                                                EXTRA GROUPS</span><br><span class="line">xv27mz.zx9qvxzr1n9ver8b   23h         2021-06-17T09:26:38+08:00   authentication,signing   &lt;none&gt;                                                     system:bootstrappers:kubeadm:default-node-token</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 新节点运行token</span><br><span class="line">[root@k8s-node2 ~]# kubeadm join 192.168.81.57:6443 --token xv27mz.zx9qvxzr1n9ver8b     --discovery-token-ca-cert-hash sha256:e79022dddd20ebaa3304fe62856393cb58a5b5b6e42e51333224e1841bbf49eb </span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> master 查看新节点的是否加入</span></span><br><span class="line">[root@k8s-master ~]# kubectl get node </span><br><span class="line">NAME         STATUS     ROLES                  AGE   VERSION</span><br><span class="line">k8s-master   Ready      control-plane,master   70d   v1.20.0</span><br><span class="line">k8s-node1    Ready      &lt;none&gt;                 70d   v1.20.0</span><br><span class="line">k8s-node2    NotReady   &lt;none&gt;                 3s    v1.20.0</span><br><span class="line">[root@k8s-master ~]# systemctl restart kubelet </span><br><span class="line">[root@k8s-master ~]# kubectl get node </span><br><span class="line">NAME         STATUS   ROLES                  AGE   VERSION</span><br><span class="line">k8s-master   Ready    control-plane,master   70d   v1.20.0</span><br><span class="line">k8s-node1    Ready    &lt;none&gt;                 70d   v1.20.0</span><br><span class="line">k8s-node2    Ready    &lt;none&gt;                 12s   v1.20.0</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>node节点重新加入集群操作【node节点操作】</p>
+</blockquote>
+<p>node节点要重新加入集群，需要重置集群状态，命令：kubeadm reset，回车后输入y即可</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">kubeadm reset</span><br></pre></td></tr></table></figure>
+<p>重新加入集群</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">kubeadm join 192.168.81.57:6443 --token xv27mz.zx9qvxzr1n9ver8b     --discovery-token-ca-cert-hash sha256:e79022dddd20ebaa3304fe62856393cb58a5b5b6e42e51333224e1841bbf49eb </span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="2-移除节点"><a href="#2-移除节点" class="headerlink" title="2.移除节点"></a>2.移除节点</h1><blockquote>
+<p>k8s集群 移除节点操作</p>
+</blockquote>
+<p>1.确认需要移除的节点上面没有部署我们所需要的资源</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">kubectl get pod -A -o wide |grep -w &quot;node名&quot; </span><br></pre></td></tr></table></figure>
+<p>2.设置该节点为不可调度(不分配新的资源到该节点上) (drain命令已经会自动把node设置为不可调度，所以可以省略执行cordon命令)</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">kubectl cordon node</span><br></pre></td></tr></table></figure>
+
+<p>3.确认完成后，先排空节点上的pod(每个节点上面都会运行一些系统自带的pod) (daemonset不会被排出节点)</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">kubectl drain node --ignore-daemonsets --force</span><br></pre></td></tr></table></figure>
+
+<p>4.排空pod之后，便可以删除节点了</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">kubectl delete node node名</span><br></pre></td></tr></table></figure>
+
+
+
+<p>链接：<a href="https://editor.csdn.net/md/?articleId=117947399">https://editor.csdn.net/md/?articleId=117947399</a></p>
+]]></content>
+      <categories>
+        <category>linux</category>
+        <category>k8s</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
         <tag>k8s</tag>
       </tags>
   </entry>
