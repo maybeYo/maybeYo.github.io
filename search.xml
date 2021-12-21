@@ -251,6 +251,84 @@
       </tags>
   </entry>
   <entry>
+    <title>Hello World</title>
+    <url>/2021/06/19/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<span id="more"></span>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>GRE隧道</title>
+    <url>/2021/09/18/gre/</url>
+    <content><![CDATA[<p><strong>GRE隧道</strong></p>
+<span id="more"></span>
+
+<p>其他国家的互联网如同一个孤岛。要想访问国外网站异常的缓慢，甚至被和谐了。可以建立一条隧道来避免这种情况，下面说说GRE隧道如何建立。</p>
+<p><strong>1. GRE介绍</strong></p>
+<p>GRE隧道是一种IP-over-IP的隧道，是通用路由封装协议，可以对某些网路层协议的数据报进行封装，使这些被封装的数据报能够在IPv4/IPv6 网络中传输。</p>
+<p>Tunnel 是一个虚拟的点对点的连接，提供了一条通路使封装的数据报文能够在这个通路上传输，并且在一个Tunnel 的两端分别对数据报进行封装及解封装。　一个X协议的报文要想穿越IP网络在Tunnel中传输，必须要经过加封装与解封装两个过程。</p>
+<p>要在 Linux 上创建GRE隧道，需要ip_gre内核模块，它是GRE通过IPv4隧道的驱动程序。</p>
+<p><strong>2. 查看是否有加载ip_gre模块</strong></p>
+ <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> modprobe ip_gre</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> lsmod | grep gre</span></span><br><span class="line">ip_gre         22432 0</span><br><span class="line">gre          12989 1 ip_gre</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>3. 创建步骤</strong></p>
+<p>环境如下：</p>
+<table>
+<thead>
+<tr>
+<th><strong>host A :</strong></th>
+<th><strong>10.253.154.5</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>host B:</strong></td>
+<td><strong>10.253.54.154</strong></td>
+</tr>
+</tbody></table>
+<p><strong>在host A上面：</strong></p>
+ <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ip tunnel add gre1 mode gre remote 10.253.54.154 local 10.253.154.5 ttl 255</span><br><span class="line">ip link set gre1 up</span><br><span class="line">ip addr add 10.10.10.1 peer 10.10.10.2 dev gre1</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>创建一个GRE类型隧道设备gre0, 并设置对端IP为10.253.54.154。隧道数据包将被从10.253.154.5也就是本地IP地址发起，其TTL字段被设置为255。隧道设备分配的IP地址为10.10.10.1，掩码为255.255.255.0。</strong></p>
+<p><strong>在host B上面：</strong></p>
+ <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ip tunnel add gre1 mode gre remote  10.253.154.5 local 10.253.54.154 ttl 255</span><br><span class="line">ip link set gre1 up</span><br><span class="line">ip addr add 10.10.10.2 peer 10.10.10.1 dev gre1</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>此时，host A 和 host B 建立起GRE隧道了。</strong></p>
+<p><strong>4. 检测连通性</strong></p>
+ <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">  ping 10.10.10.2 (host A)</span><br><span class="line">  PING 10.10.10.2 (10.10.10.2) 56(84) bytes of data.</span><br><span class="line">  64 bytes from 10.10.10.2: icmp_req=1 ttl=64 time=0.319 ms</span><br><span class="line">  64 bytes from 10.10.10.2: icmp_req=2 ttl=64 time=0.296 ms</span><br><span class="line">  64 bytes from 10.10.10.2: icmp_req=3 ttl=64 time=0.287 ms</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>5.撤销GRE隧道</strong></p>
+<p><strong>在任一一端操作下面命令</strong></p>
+ <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ip link set gre1 down</span><br><span class="line">ip tunnel del gre1</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>activemq</title>
     <url>/2021/07/28/activemq/</url>
     <content><![CDATA[<p>activemq配置文件</p>
@@ -379,76 +457,6 @@
       </tags>
   </entry>
   <entry>
-    <title>GRE隧道</title>
-    <url>/2021/09/18/gre/</url>
-    <content><![CDATA[<p><strong>GRE隧道</strong></p>
-<span id="more"></span>
-
-<p>其他国家的互联网如同一个孤岛。要想访问国外网站异常的缓慢，甚至被和谐了。可以建立一条隧道来避免这种情况，下面说说GRE隧道如何建立。</p>
-<p><strong>1. GRE介绍</strong></p>
-<p>GRE隧道是一种IP-over-IP的隧道，是通用路由封装协议，可以对某些网路层协议的数据报进行封装，使这些被封装的数据报能够在IPv4/IPv6 网络中传输。</p>
-<p>Tunnel 是一个虚拟的点对点的连接，提供了一条通路使封装的数据报文能够在这个通路上传输，并且在一个Tunnel 的两端分别对数据报进行封装及解封装。　一个X协议的报文要想穿越IP网络在Tunnel中传输，必须要经过加封装与解封装两个过程。</p>
-<p>要在 Linux 上创建GRE隧道，需要ip_gre内核模块，它是GRE通过IPv4隧道的驱动程序。</p>
-<p><strong>2. 查看是否有加载ip_gre模块</strong></p>
- <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> modprobe ip_gre</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> lsmod | grep gre</span></span><br><span class="line">ip_gre         22432 0</span><br><span class="line">gre          12989 1 ip_gre</span><br></pre></td></tr></table></figure>
-
-
-
-<p><strong>3. 创建步骤</strong></p>
-<p>环境如下：</p>
-<p>host A :  121.207.22.123</p>
-<p>host B: 111.2.33.28</p>
-<p>在host A上面：</p>
- <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">ip tunnel add gre1 mode gre remote 111.2.33.28 local 121.207.22.123 ttl 255</span><br><span class="line">ip link set gre1 up</span><br><span class="line">ip addr add 10.10.10.1 peer 10.10.10.2 dev gre1</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-<p>创建一个GRE类型隧道设备gre0, 并设置对端IP为111.2.33.28。隧道数据包将被从121.207.22.123也就是本地IP地址发起，其TTL字段被设置为255。隧道设备分配的IP地址为10.10.10.1，掩码为255.255.255.0。</p>
-<p>在host B上面：</p>
- <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ip tunnel add gre1 mode gre remote  121.207.22.123 local 111.2.33.28 ttl 255</span><br><span class="line">ip link set gre1 up</span><br><span class="line">ip addr add 10.10.10.2 peer 10.10.10.1 dev gre1</span><br></pre></td></tr></table></figure>
-
-
-
-<p>此时，host A 和 host B 建立起GRE隧道了。</p>
-<p><strong>4. 检测连通性</strong></p>
- <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ping 10.10.10.2 (host A)</span><br><span class="line">PING 10.10.10.2 (10.10.10.2) 56(84) bytes of data.</span><br><span class="line">64 bytes from 10.10.10.2: icmp_req=1 ttl=64 time=0.319 ms</span><br><span class="line">64 bytes from 10.10.10.2: icmp_req=2 ttl=64 time=0.296 ms</span><br><span class="line">64 bytes from 10.10.10.2: icmp_req=3 ttl=64 time=0.287 ms</span><br></pre></td></tr></table></figure>
-
-
-
-<ol start="5">
-<li>撤销GRE隧道</li>
-</ol>
-<p>在任一一端操作下面命令</p>
- <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ip link set gre1 down</span><br><span class="line">ip tunnel del gre1</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>Linux</category>
-      </categories>
-      <tags>
-        <tag>Linux</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Hello World</title>
-    <url>/2021/06/19/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<span id="more"></span>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-]]></content>
-  </entry>
-  <entry>
     <title>hexo资源文件夹</title>
     <url>/2021/07/20/hexo%E8%B5%84%E6%BA%90%E6%96%87%E4%BB%B6%E5%A4%B9/</url>
     <content><![CDATA[<p>hexo资源文件夹</p>
@@ -479,6 +487,46 @@
       </categories>
       <tags>
         <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>k8s常见总结1</title>
+    <url>/2021/07/17/k8s%E5%B8%B8%E8%A7%81%E6%80%BB%E7%BB%93/</url>
+    <content><![CDATA[<p>k8s常见总结1</p>
+<span id="more"></span>
+
+<h1 id="1-什么是Kubernetes？"><a href="#1-什么是Kubernetes？" class="headerlink" title="1.什么是Kubernetes？"></a>1.什么是Kubernetes？</h1><p>​    Kubernetes是一个开源容器管理工具，负责容器部署，容器扩缩容以及负载平衡。作为Google的创意之作，它提供了出色的社区，并与所有云提供商合作。因此，我们可以说Kubernetes不是<em>一个容器化平台，而是一个多容器管理解决方案。</em></p>
+<h1 id="2-在主机和容器上部署应用程序有什么区别？"><a href="#2-在主机和容器上部署应用程序有什么区别？" class="headerlink" title="2.在主机和容器上部署应用程序有什么区别？"></a>2.在主机和容器上部署应用程序有什么区别？</h1><p>​    主机上部署应用程序。这种架构将具有操作系统，然后操作系统将具有内核，该内核将在应用程序所需的操作系统上安装各种库。因此，在这种框架中，您可以拥有n个应用程序，并且所有应用程序将共享该操作系统中存在的库，而在容器中部署应用程序时，体系结构则略有不同。</p>
+<p>​    这种架构将有一个内核，这是唯一一个在所有应用程序之间唯一共同的东西。因此，如果有一个需要Java的特定应用程序，那么我们将获得访问Java的特定应用程序，如果有另一个需要Python的应用程序，则只有该特定应用程序才能访问Python。</p>
+<p>​    容器化的，这块与其他应用程序隔离。因此，应用程序具有与系统其余部分隔离的必要库和二进制文件，并且不能被任何其他应用程序侵占。</p>
+<h1 id="3-Kubernetes如何简化容器化部署？"><a href="#3-Kubernetes如何简化容器化部署？" class="headerlink" title="3.Kubernetes如何简化容器化部署？"></a>3.Kubernetes如何简化容器化部署？</h1><p>​    由于典型应用程序将具有跨多个主机运行的容器集群，因此所有这些容器都需要相互通信。因此，要做到这一点，你需要一些能够负载平衡，扩展和监控容器的东西。由于Kubernetes与云无关并且可以在任何公共/私有提供商上运行，因此必须是您简化容器化部署的选择。</p>
+<h1 id="4-Kubernetes的集群了解"><a href="#4-Kubernetes的集群了解" class="headerlink" title="4.Kubernetes的集群了解"></a>4.Kubernetes的集群了解</h1><p>​    Kubernetes背后的基础是我们可以实施所需的状态管理，我的意思是我们可以提供特定配置的集群服务，并且集群服务将在基础架构中运行并运行该配置。</p>
+<p>​    因此，部署文件将具有提供给集群服务所需的所有配置。现在，部署文件将被提供给API，然后由集群服务决定如何在环境中安排这些pod，并确保正确运行的pod数量。</p>
+<p>​    因此，位于服务前面的API，工作节点和节点运行的Kubelet进程，共同构成了Kubernetes集群。</p>
+<h1 id="5-什么是Google容器引擎？"><a href="#5-什么是Google容器引擎？" class="headerlink" title="5.什么是Google容器引擎？"></a>5.什么是Google容器引擎？</h1><p>​    Google Container Engine（GKE）是Docker容器和集群的开源管理平台。这个基于Kubernetes的引擎仅支持在Google的公共云服务中运行的群集。</p>
+<h1 id="6-什么是Minikube？"><a href="#6-什么是Minikube？" class="headerlink" title="6.什么是Minikube？"></a>6.什么是Minikube？</h1><p>​    Minikube是一种工具，可以在本地轻松运行Kubernetes。这将在虚拟机中运行单节点Kubernetes群集。</p>
+<h1 id="7-什么是Kubectl？"><a href="#7-什么是Kubectl？" class="headerlink" title="7.什么是Kubectl？"></a>7.什么是Kubectl？</h1><p>​    Kubectl是一个平台，您可以使用该平台将命令传递给集群。因此，它基本上为CLI提供了针对Kubernetes集群运行命令的方法，以及创建和管理Kubernetes组件的各种方法。</p>
+<h1 id="8-什么是Kubelet？"><a href="#8-什么是Kubelet？" class="headerlink" title="8.什么是Kubelet？"></a>8.什么是Kubelet？</h1><p>​    这是一个代理服务，它在每个节点上运行，并使从服务器与主服务器通信。因此，Kubelet处理PodSpec中提供给它的容器的描述，并确保PodSpec中描述的容器运行正常。</p>
+<h1 id="9-Kubernetes-Architecture的不同组件有哪些？"><a href="#9-Kubernetes-Architecture的不同组件有哪些？" class="headerlink" title="9.Kubernetes Architecture的不同组件有哪些？"></a>9.Kubernetes Architecture的不同组件有哪些？</h1><p>​    Kubernetes Architecture主要有两个组件 - 主节点和工作节点。如下图所示，master和worker节点中包含许多内置组件。主节点具有kube-controller-manager，kube-apiserver，kube-scheduler等。而工作节点具有在每个节点上运行的kubelet和kube-proxy。</p>
+<h1 id="10-你对Kube-proxy有什么了解？"><a href="#10-你对Kube-proxy有什么了解？" class="headerlink" title="10.你对Kube-proxy有什么了解？"></a>10.你对<code>Kube-proxy</code>有什么了解？</h1><p>​    Kube-proxy可以在每个节点上运行，并且可以跨后端网络服务进行简单的TCP / UDP数据包转发。基本上，它是一个网络代理，它反映了每个节点上Kubernetes API中配置的服务。因此，Docker可链接的兼容环境变量提供由代理打开的群集IP和端口。</p>
+<h1 id="11-Kubernetes中主节点的工作情况？"><a href="#11-Kubernetes中主节点的工作情况？" class="headerlink" title="11.Kubernetes中主节点的工作情况？"></a>11.Kubernetes中主节点的工作情况？</h1><p>​    Kubernetes master控制容器存在的节点和节点内部。现在，这些单独的容器包含在容器内部和每个容器内部，您可以根据配置和要求拥有不同数量的容器。因此，如果必须部署pod，则可以使用用户界面或命令行界面部署它们。然后，在节点上调度这些pod，并根据资源需求，将pod分配给这些节点。kube-apiserver确保在Kubernetes节点和主组件之间建立通信。</p>
+<h1 id="12-kube-apiserver和kube-scheduler的作用是什么？"><a href="#12-kube-apiserver和kube-scheduler的作用是什么？" class="headerlink" title="12.kube-apiserver和kube-scheduler的作用是什么？"></a>12.<code>kube-apiserver</code>和<code>kube-scheduler</code>的作用是什么？</h1><p>​    <code>kube-apiserver</code>遵循横向扩展架构，是主节点控制面板的前端。这将公开Kubernetes主节点组件的所有API，并负责在Kubernetes节点和Kubernetes主组件之间建立通信。</p>
+<p>​    <code>kube-scheduler</code>负责工作节点上工作负载的分配和管理。因此，它根据资源需求选择最合适的节点来运行未调度的pod，并跟踪资源利用率。它确保不在已满的节点上调度工作负载。</p>
+<h1 id="13-kubernetes控制管理器吗？"><a href="#13-kubernetes控制管理器吗？" class="headerlink" title="13.kubernetes控制管理器吗？"></a>13.kubernetes控制管理器吗？</h1><p>​    多个控制器进程在主节点上运行，但是一起编译为单个进程运行，即Kubernetes控制器管理器。因此，Controller Manager是一个嵌入控制器并执行命名空间创建和垃圾收集的守护程序。它拥有责任并与API服务器通信以管理端点。</p>
+<h1 id="14-什么是ETCD？"><a href="#14-什么是ETCD？" class="headerlink" title="14.什么是ETCD？"></a>14.什么是ETCD？</h1><p>​    Etcd是用Go编程语言编写的，是一个分布式键值存储，用于协调分布式工作。因此，Etcd存储Kubernetes集群的配置数据，表示在任何给定时间点的集群状态。</p>
+<h2 id="15-Kubernetes的负载均衡器了解"><a href="#15-Kubernetes的负载均衡器了解" class="headerlink" title="15.Kubernetes的负载均衡器了解"></a>15.Kubernetes的负载均衡器了解</h2><p>​    负载均衡器是暴露服务的最常见和标准方式之一。根据工作环境使用两种类型的负载均衡器，即<em>内部负载均衡器</em>或<em>外部负载均衡器</em>。内部负载均衡器自动平衡负载并使用所需配置分配容器，而外部负载均衡器将流量从外部负载引导至后端容器。</p>
+<h1 id="16-Ingress网络，它是如何工作的？"><a href="#16-Ingress网络，它是如何工作的？" class="headerlink" title="16.Ingress网络，它是如何工作的？"></a>16.Ingress网络，它是如何工作的？</h1><p>​    Ingress网络是一组规则，充当Kubernetes集群的入口点。这允许入站连接，可以将其配置为通过可访问的URL，负载平衡流量或通过提供基于名称的虚拟主机从外部提供服务。因此，Ingress是一个API对象，通常通过HTTP管理集群中服务的外部访问，是暴露服务的最有效方式。</p>
+<h1 id="17-Replica-Set-和-Replication-Controller之间有什么区别？"><a href="#17-Replica-Set-和-Replication-Controller之间有什么区别？" class="headerlink" title="17.Replica Set 和 Replication Controller之间有什么区别？"></a>17.Replica Set 和 Replication Controller之间有什么区别？</h1><p>​    <code>Replica Set </code>和 <code>Replication Controller</code>几乎完全相同。它们都确保在任何给定时间运行指定数量的pod副本。不同之处在于复制pod使用的选择器。Replica Set使用基于集合的选择器，而Replication Controller使用基于权限的选择器。</p>
+<ul>
+<li>Equity-Based选择器：这种类型的选择器允许按标签键和值进行过滤。因此，在外行术语中，基于Equity的选择器将仅查找与标签具有完全相同短语的pod。 示例：假设您的标签键表示app = nginx，那么，使用此选择器，您只能查找标签应用程序等于nginx的那些pod。</li>
+<li>Selector-Based选择器：此类型的选择器允许根据一组值过滤键。因此，换句话说，基于Selector的选择器将查找已在集合中提及其标签的pod。 示例：假设您的标签键在（nginx，NPS，Apache）中显示应用程序。然后，使用此选择器，如果您的应用程序等于任何nginx，NPS或Apache，则选择器将其视为真实结果。</li>
+</ul>
+]]></content>
+      <categories>
+        <category>k8s</category>
+      </categories>
+      <tags>
+        <tag>k8s</tag>
       </tags>
   </entry>
   <entry>
@@ -531,46 +579,6 @@
       </categories>
       <tags>
         <tag>Linux</tag>
-        <tag>k8s</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>k8s常见总结1</title>
-    <url>/2021/07/17/k8s%E5%B8%B8%E8%A7%81%E6%80%BB%E7%BB%93/</url>
-    <content><![CDATA[<p>k8s常见总结1</p>
-<span id="more"></span>
-
-<h1 id="1-什么是Kubernetes？"><a href="#1-什么是Kubernetes？" class="headerlink" title="1.什么是Kubernetes？"></a>1.什么是Kubernetes？</h1><p>​    Kubernetes是一个开源容器管理工具，负责容器部署，容器扩缩容以及负载平衡。作为Google的创意之作，它提供了出色的社区，并与所有云提供商合作。因此，我们可以说Kubernetes不是<em>一个容器化平台，而是一个多容器管理解决方案。</em></p>
-<h1 id="2-在主机和容器上部署应用程序有什么区别？"><a href="#2-在主机和容器上部署应用程序有什么区别？" class="headerlink" title="2.在主机和容器上部署应用程序有什么区别？"></a>2.在主机和容器上部署应用程序有什么区别？</h1><p>​    主机上部署应用程序。这种架构将具有操作系统，然后操作系统将具有内核，该内核将在应用程序所需的操作系统上安装各种库。因此，在这种框架中，您可以拥有n个应用程序，并且所有应用程序将共享该操作系统中存在的库，而在容器中部署应用程序时，体系结构则略有不同。</p>
-<p>​    这种架构将有一个内核，这是唯一一个在所有应用程序之间唯一共同的东西。因此，如果有一个需要Java的特定应用程序，那么我们将获得访问Java的特定应用程序，如果有另一个需要Python的应用程序，则只有该特定应用程序才能访问Python。</p>
-<p>​    容器化的，这块与其他应用程序隔离。因此，应用程序具有与系统其余部分隔离的必要库和二进制文件，并且不能被任何其他应用程序侵占。</p>
-<h1 id="3-Kubernetes如何简化容器化部署？"><a href="#3-Kubernetes如何简化容器化部署？" class="headerlink" title="3.Kubernetes如何简化容器化部署？"></a>3.Kubernetes如何简化容器化部署？</h1><p>​    由于典型应用程序将具有跨多个主机运行的容器集群，因此所有这些容器都需要相互通信。因此，要做到这一点，你需要一些能够负载平衡，扩展和监控容器的东西。由于Kubernetes与云无关并且可以在任何公共/私有提供商上运行，因此必须是您简化容器化部署的选择。</p>
-<h1 id="4-Kubernetes的集群了解"><a href="#4-Kubernetes的集群了解" class="headerlink" title="4.Kubernetes的集群了解"></a>4.Kubernetes的集群了解</h1><p>​    Kubernetes背后的基础是我们可以实施所需的状态管理，我的意思是我们可以提供特定配置的集群服务，并且集群服务将在基础架构中运行并运行该配置。</p>
-<p>​    因此，部署文件将具有提供给集群服务所需的所有配置。现在，部署文件将被提供给API，然后由集群服务决定如何在环境中安排这些pod，并确保正确运行的pod数量。</p>
-<p>​    因此，位于服务前面的API，工作节点和节点运行的Kubelet进程，共同构成了Kubernetes集群。</p>
-<h1 id="5-什么是Google容器引擎？"><a href="#5-什么是Google容器引擎？" class="headerlink" title="5.什么是Google容器引擎？"></a>5.什么是Google容器引擎？</h1><p>​    Google Container Engine（GKE）是Docker容器和集群的开源管理平台。这个基于Kubernetes的引擎仅支持在Google的公共云服务中运行的群集。</p>
-<h1 id="6-什么是Minikube？"><a href="#6-什么是Minikube？" class="headerlink" title="6.什么是Minikube？"></a>6.什么是Minikube？</h1><p>​    Minikube是一种工具，可以在本地轻松运行Kubernetes。这将在虚拟机中运行单节点Kubernetes群集。</p>
-<h1 id="7-什么是Kubectl？"><a href="#7-什么是Kubectl？" class="headerlink" title="7.什么是Kubectl？"></a>7.什么是Kubectl？</h1><p>​    Kubectl是一个平台，您可以使用该平台将命令传递给集群。因此，它基本上为CLI提供了针对Kubernetes集群运行命令的方法，以及创建和管理Kubernetes组件的各种方法。</p>
-<h1 id="8-什么是Kubelet？"><a href="#8-什么是Kubelet？" class="headerlink" title="8.什么是Kubelet？"></a>8.什么是Kubelet？</h1><p>​    这是一个代理服务，它在每个节点上运行，并使从服务器与主服务器通信。因此，Kubelet处理PodSpec中提供给它的容器的描述，并确保PodSpec中描述的容器运行正常。</p>
-<h1 id="9-Kubernetes-Architecture的不同组件有哪些？"><a href="#9-Kubernetes-Architecture的不同组件有哪些？" class="headerlink" title="9.Kubernetes Architecture的不同组件有哪些？"></a>9.Kubernetes Architecture的不同组件有哪些？</h1><p>​    Kubernetes Architecture主要有两个组件 - 主节点和工作节点。如下图所示，master和worker节点中包含许多内置组件。主节点具有kube-controller-manager，kube-apiserver，kube-scheduler等。而工作节点具有在每个节点上运行的kubelet和kube-proxy。</p>
-<h1 id="10-你对Kube-proxy有什么了解？"><a href="#10-你对Kube-proxy有什么了解？" class="headerlink" title="10.你对Kube-proxy有什么了解？"></a>10.你对<code>Kube-proxy</code>有什么了解？</h1><p>​    Kube-proxy可以在每个节点上运行，并且可以跨后端网络服务进行简单的TCP / UDP数据包转发。基本上，它是一个网络代理，它反映了每个节点上Kubernetes API中配置的服务。因此，Docker可链接的兼容环境变量提供由代理打开的群集IP和端口。</p>
-<h1 id="11-Kubernetes中主节点的工作情况？"><a href="#11-Kubernetes中主节点的工作情况？" class="headerlink" title="11.Kubernetes中主节点的工作情况？"></a>11.Kubernetes中主节点的工作情况？</h1><p>​    Kubernetes master控制容器存在的节点和节点内部。现在，这些单独的容器包含在容器内部和每个容器内部，您可以根据配置和要求拥有不同数量的容器。因此，如果必须部署pod，则可以使用用户界面或命令行界面部署它们。然后，在节点上调度这些pod，并根据资源需求，将pod分配给这些节点。kube-apiserver确保在Kubernetes节点和主组件之间建立通信。</p>
-<h1 id="12-kube-apiserver和kube-scheduler的作用是什么？"><a href="#12-kube-apiserver和kube-scheduler的作用是什么？" class="headerlink" title="12.kube-apiserver和kube-scheduler的作用是什么？"></a>12.<code>kube-apiserver</code>和<code>kube-scheduler</code>的作用是什么？</h1><p>​    <code>kube-apiserver</code>遵循横向扩展架构，是主节点控制面板的前端。这将公开Kubernetes主节点组件的所有API，并负责在Kubernetes节点和Kubernetes主组件之间建立通信。</p>
-<p>​    <code>kube-scheduler</code>负责工作节点上工作负载的分配和管理。因此，它根据资源需求选择最合适的节点来运行未调度的pod，并跟踪资源利用率。它确保不在已满的节点上调度工作负载。</p>
-<h1 id="13-kubernetes控制管理器吗？"><a href="#13-kubernetes控制管理器吗？" class="headerlink" title="13.kubernetes控制管理器吗？"></a>13.kubernetes控制管理器吗？</h1><p>​    多个控制器进程在主节点上运行，但是一起编译为单个进程运行，即Kubernetes控制器管理器。因此，Controller Manager是一个嵌入控制器并执行命名空间创建和垃圾收集的守护程序。它拥有责任并与API服务器通信以管理端点。</p>
-<h1 id="14-什么是ETCD？"><a href="#14-什么是ETCD？" class="headerlink" title="14.什么是ETCD？"></a>14.什么是ETCD？</h1><p>​    Etcd是用Go编程语言编写的，是一个分布式键值存储，用于协调分布式工作。因此，Etcd存储Kubernetes集群的配置数据，表示在任何给定时间点的集群状态。</p>
-<h2 id="15-Kubernetes的负载均衡器了解"><a href="#15-Kubernetes的负载均衡器了解" class="headerlink" title="15.Kubernetes的负载均衡器了解"></a>15.Kubernetes的负载均衡器了解</h2><p>​    负载均衡器是暴露服务的最常见和标准方式之一。根据工作环境使用两种类型的负载均衡器，即<em>内部负载均衡器</em>或<em>外部负载均衡器</em>。内部负载均衡器自动平衡负载并使用所需配置分配容器，而外部负载均衡器将流量从外部负载引导至后端容器。</p>
-<h1 id="16-Ingress网络，它是如何工作的？"><a href="#16-Ingress网络，它是如何工作的？" class="headerlink" title="16.Ingress网络，它是如何工作的？"></a>16.Ingress网络，它是如何工作的？</h1><p>​    Ingress网络是一组规则，充当Kubernetes集群的入口点。这允许入站连接，可以将其配置为通过可访问的URL，负载平衡流量或通过提供基于名称的虚拟主机从外部提供服务。因此，Ingress是一个API对象，通常通过HTTP管理集群中服务的外部访问，是暴露服务的最有效方式。</p>
-<h1 id="17-Replica-Set-和-Replication-Controller之间有什么区别？"><a href="#17-Replica-Set-和-Replication-Controller之间有什么区别？" class="headerlink" title="17.Replica Set 和 Replication Controller之间有什么区别？"></a>17.Replica Set 和 Replication Controller之间有什么区别？</h1><p>​    <code>Replica Set </code>和 <code>Replication Controller</code>几乎完全相同。它们都确保在任何给定时间运行指定数量的pod副本。不同之处在于复制pod使用的选择器。Replica Set使用基于集合的选择器，而Replication Controller使用基于权限的选择器。</p>
-<ul>
-<li>Equity-Based选择器：这种类型的选择器允许按标签键和值进行过滤。因此，在外行术语中，基于Equity的选择器将仅查找与标签具有完全相同短语的pod。 示例：假设您的标签键表示app = nginx，那么，使用此选择器，您只能查找标签应用程序等于nginx的那些pod。</li>
-<li>Selector-Based选择器：此类型的选择器允许根据一组值过滤键。因此，换句话说，基于Selector的选择器将查找已在集合中提及其标签的pod。 示例：假设您的标签键在（nginx，NPS，Apache）中显示应用程序。然后，使用此选择器，如果您的应用程序等于任何nginx，NPS或Apache，则选择器将其视为真实结果。</li>
-</ul>
-]]></content>
-      <categories>
-        <category>k8s</category>
-      </categories>
-      <tags>
         <tag>k8s</tag>
       </tags>
   </entry>
