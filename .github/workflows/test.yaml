@@ -1,11 +1,11 @@
-# name: Deploy
+name: Deploy
 
-# on: [push]
+on: [push]
 
-# jobs:
-#   build:
-#     runs-on: ubuntu-latest
-#     name: A job to deploy blog.
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: A job to deploy blog.
 
 #     steps:
 #     - name: Checkout
